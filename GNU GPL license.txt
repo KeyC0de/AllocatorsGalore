@@ -1,5 +1,5 @@
 AllocatorsGalore
-    Copyright (C) 2020 Nikos Lazaridis (KeyC0de)
+    Copyright (C) 2019 Nikos Lazaridis (KeyC0de)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

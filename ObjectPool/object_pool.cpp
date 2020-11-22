@@ -93,9 +93,9 @@ int dwarvenFunc()
 int main()
 {
 	std::ios_base::sync_with_stdio(false);
-	srand(time(0));
+	srand(time(nullptr));
 
-	/// \brief testing the Pool's functionality
+	/// testing the Pool's functionality
 	std::vector<std::future<int>> vec;
 	vec.reserve(4);
 	vec.emplace_back(std::async(std::launch::async, elvenFunc));
@@ -126,7 +126,7 @@ int main()
 	}
 	std::cout << "Final word = " << term << '\n';
 
-	/// \brief testing the Pool's performance
+	/// testing the Pool's performance
 	//ObjectPool<GameObject> gopool{ 1024 };
 	//GameObject *go = gopool.allocate();
 	//
@@ -158,5 +158,6 @@ int main()
 	// ~40ms - Debug
 	// ~1ms - Release
 
+	std::system( "pause" );
 	return 0;
 }

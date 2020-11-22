@@ -4,19 +4,23 @@
 <hr>
 
 
-I was always fascinated by memory allocation. And allocators are strange creatures in the C++ bestiary.
+I was always fascinated by memory allocation. Allocators are strange creatures in the C++ bestiary, but they are very interesting.
 
 This is the culmination of my efforts creating some of the most popular memory allocators:
 
-- Pre-C++11 default allocator
-- C++11 compatible allocator replacement
-- C++11 compatible aligned allocator
-- Tracking allocator (default + tracks allocations)
-- Linear (aka Arena) allocator
-- Stack Allocator
-- Object Pool allocator
+- Pre-C++11 default allocator (`DefaultAllocator` project)
+- C++11 compatible allocator replacement (`Allocators` project)
+- C++11 compatible aligned allocator (`AlignedAllocator` project)
+- Tracking allocator (default + tracks allocations) (`TrackingAllocator` project)
+- Linear (aka Arena) allocator (`LinearAllocator`project)
+- Stack Allocator (`StackALlocator` & `StackAllocatorTS` projects)
+- Object Pool allocator (`ObjectPool` project)
+
+They are designed to be cross platform and modern C++17 compliant.
 
 Both serial as well as thread safe versions are included for almost all of them.
+
+The code is commented and you should be able to follow along with no trouble. However for proper understanding you should at least read all that follows this introduction.
 
 
 ## Memory Layout of a program in C
@@ -152,8 +156,6 @@ Define nested alias `propagate_on_container_move_assignment` as `true_type`.
 Define nested alias `propagate_on_container_swap` as `true_type`.
 
 So whenever you have an allocator for a certain type, you can check whether you can use it to deallocate memory of a different type without the need to rebind the allocator.
-
-I used Windows 8.1 x86_64, Visual Studio 2017, Modern C++17 to build the project. It should work on other platforms as well.
 
 
 # Custom Allocators
@@ -435,9 +437,31 @@ Static thread_local block-scope variables can be introduced for various useful p
 [tcmalloc](http://goog-perftools.sourceforge.net/doc/tcmalloc.html) is a malloc implementation created at Google targeting performance optimization in multithreaded environments. It uses a pool allocation technique.
 
 
+## Advanced++
+
+### Allocator Propagation
+
+1. What happens when you copy the container? What kind of allocator does the copy get? What happens when you assign to a container or swap to containers? Are the allocators swapped, too, or is only the data swapped?
+2. If the container contains types which themselves require an allocator, how can the contained elements be made aware of the container's allocator so that they may use compatible allocators?
+
+If an allocator is stateless, then all container objects that use the same allocator type have compatible allocators, and there is no problem. For example, swapping two containers can be achieved by simply exchanging internal memory handles; either container's allocator knows how to deallocate the memory.
+
+However, when allocators are stateful, the situation is more complicated. We distinguish three situations which require a policy decision:
+
+1. Container copy. Suppose container X uses an allocator of type Alloc. Given X x1, which allocator does X x2(x1) use? It could either be a copy of x.get_allocator(), or it could be a default-constructed, new allocator, or it could be something else. The universal answer is provided by `AllocTraits::select_on_container_copy_construction(x1.get_allocator())`. This trait is configurable, eg via the member function `Alloc::select_on_container_copy_construction`, and the default is to return a copy of the existing allocator.
+2. Assignment (copy and move assignment). When you say `x1 = x2`, or more interestingly yet, `x1 = std::move(x2)`, you have to decide whether x1 is supposed to take the allocator from x2 or to keep its own allocator. Either choice has advantages and disadvantages in the case where the two allocators are not equal, and so neither one can deallocate the other one's memory. If the allocator is reassigned, then it may be necessary to deallocate the currently held data with the old allocator first, and allocate new memory with the newly assigned allocator, rather than keeping the existing memory and just reassigning the element values. On the other hand, if the allocator is reassigned, move-assignment is efficient, since the entire internal allocation can just be moved over to x1. If the allocator is not reassigned, move-assignment would require an actual element-by-element copy. The desired policy is chosen by means of the types `AllocTraits::propagate_on_container_copy_assignment` ("POCCA") and `AllocTraits::propagate_on_container_move_assignment` ("POCMA"), which are either `std::true_type` or `std::false_type`. Note that this choice is made per allocator type, not per object.
+3. Swap. The same considerations apply in principle as for assignment, and the controlling trait is `AllocTraits::propagate_on_container_swap` ("POCS"). However, the standard library container requirements mandate that POCS is either true, or that otherwise the allocators of the containers that are to be swapped compare equal. If this were not required, then swapping with unequal, unswapped allocators could not preserve iterators.
+
+For more on this and relevant subjects see Thomas Köppe articles on the subject (link below).
+
+I recommend you combine this with a Leak Checker (like my own [here](https://github.com/KeyC0de/WindowsLeakChecker))facility to see first hand there are no memory leaks in any allocator.
+
+I used Windows 8.1 x86_64, Visual Studio 2017, Modern C++17 to build the project. It should work on other platforms as well.
+
+
 # Contribute
 
-Please submit any bugs you find through GitHub repository 'Issues' page with details describing how to replicate the problem. If you liked it or you learned something new give it a star, clone it, laugh at it, contribute to it whatever. I appreciate all of it. Enjoy.
+Please submit any bugs you find through GitHub repository 'Issues' page with details describing how to replicate the problem. I intend to improve this and better it in the future. If you liked it or you learned something new give it a star, clone it, laugh at it, contribute to it whatever. I appreciate all of it. Enjoy.
 
 
 # License
@@ -454,4 +478,5 @@ website: *www.keyc0de.net*
 # Acknowledgements
 
 gamedev.net [post](https://www.gamedev.net/tutorials/programming/general-and-gameplay-programming/c-custom-memory-allocation-r3010/)</br>
-Big thanks to [cppreference.com](https://en.cppreference.com/w/Main_Page)
+C++11 Allocator Requirements cppreference [page](https://en.cppreference.com/w/cpp/named_req/Allocator)
+Thomas Köppe [articles](https://rawgit.com/google/cxx-std-draft/allocator-paper/allocator_example_container.html)

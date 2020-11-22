@@ -6,7 +6,6 @@
 #include <vector>
 #include "stack_allocator_thread_safe.h"
 
-
 #include <scoped_allocator>
 
 template<typename T, std::size_t alignment = alignof(std::max_align_t)>
@@ -217,20 +216,23 @@ int stressTest()
 	return EXIT_SUCCESS;
 }
 
+
+
 int main()
 {
 	std::cout << std::boolalpha << '\n';
 
 	std::vector<std::thread> threads{ std::thread::hardware_concurrency() };
 
-	for (auto& t : threads)
+	for ( auto& t : threads )
 	{
 		t = std::thread{ stressTest };
 	}
 
-	for(auto& t: threads)
-		if (t.joinable())
+	for( auto& t : threads )
+		if ( t.joinable() )
 			t.join();
 
-	return EXIT_SUCCESS;
+	std::system( "pause" );
+	return 0;
 }

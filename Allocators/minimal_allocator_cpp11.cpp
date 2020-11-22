@@ -1,4 +1,7 @@
 #include <iostream>
+#include <string>
+#include <vector>
+#include <deque>
 #include "minimal_allocator_cpp11.h"
 
 int main()
@@ -16,13 +19,13 @@ int main()
 
 	std::vector<std::string, Allocator<std::string>> v;
 	v.reserve(100);
-	v.push_back("Hello");
-	v.push_back("w/e");
-	v.push_back("whatever");
-	v.push_back("there is ist sofi j");
-	v.push_back("wisdom");
-	v.push_back("fear");
-	v.push_back("there's more than meets the eye");
+	v.emplace_back("Hello");
+	v.emplace_back("w/e");
+	v.emplace_back("whatever");
+	v.emplace_back("there is ist sofi j");
+	v.emplace_back("wisdom");
+	v.emplace_back("fear");
+	v.emplace_back("there's more than meets the eye");
 
 	for (const auto &s : v)
 	{
@@ -48,4 +51,7 @@ int main()
 	std::cout << typeid(dq.get_allocator()).name() << '\n';
 
 	std::cout << (dq.get_allocator() == v.get_allocator()) << '\n';
+
+	std::system( "pause" );
+	return 0;
 }

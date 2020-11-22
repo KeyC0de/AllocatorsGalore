@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leak_Checker", "..\Leak_Che
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearAllocator", "LinearAllocator\LinearAllocator.vcxproj", "{63FE9161-77DA-42CD-885A-99E14D085C14}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearAllocatorTS", "LinearAllocatorTS\LinearAllocatorTS.vcxproj", "{B1B96D20-9FD2-476F-9F55-030158C152F2}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StackAllocator", "StackAllocator\StackAllocator.vcxproj", "{82C63312-E15E-40A3-8770-A9B0864C2C76}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StackAllocatorTS", "StackAllocatorTS\StackAllocatorTS.vcxproj", "{E987EBC1-F7D2-4437-A32B-A473820B2E98}"
@@ -55,14 +53,6 @@ Global
 		{63FE9161-77DA-42CD-885A-99E14D085C14}.Release|x64.Build.0 = Release|x64
 		{63FE9161-77DA-42CD-885A-99E14D085C14}.Release|x86.ActiveCfg = Release|Win32
 		{63FE9161-77DA-42CD-885A-99E14D085C14}.Release|x86.Build.0 = Release|Win32
-		{B1B96D20-9FD2-476F-9F55-030158C152F2}.Debug|x64.ActiveCfg = Debug|x64
-		{B1B96D20-9FD2-476F-9F55-030158C152F2}.Debug|x64.Build.0 = Debug|x64
-		{B1B96D20-9FD2-476F-9F55-030158C152F2}.Debug|x86.ActiveCfg = Debug|Win32
-		{B1B96D20-9FD2-476F-9F55-030158C152F2}.Debug|x86.Build.0 = Debug|Win32
-		{B1B96D20-9FD2-476F-9F55-030158C152F2}.Release|x64.ActiveCfg = Release|x64
-		{B1B96D20-9FD2-476F-9F55-030158C152F2}.Release|x64.Build.0 = Release|x64
-		{B1B96D20-9FD2-476F-9F55-030158C152F2}.Release|x86.ActiveCfg = Release|Win32
-		{B1B96D20-9FD2-476F-9F55-030158C152F2}.Release|x86.Build.0 = Release|Win32
 		{82C63312-E15E-40A3-8770-A9B0864C2C76}.Debug|x64.ActiveCfg = Debug|x64
 		{82C63312-E15E-40A3-8770-A9B0864C2C76}.Debug|x64.Build.0 = Debug|x64
 		{82C63312-E15E-40A3-8770-A9B0864C2C76}.Debug|x86.ActiveCfg = Debug|Win32

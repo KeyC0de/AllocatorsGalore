@@ -122,13 +122,14 @@ int main()
 	struct AlignedInt {
 		alignas(intAlignment) int aint;
 	};
-	StackAllocator<AlignedInt, intAlignment> LA{ 10000 };
-	AlignedInt* palignedInts = LA.allocate(64);
-	for (int i = 0; i < 64; i++)
-		(palignedInts + sizeof(AlignedInt) * i)->aint = i;
-	for (int i = 0; i < 64; i++)
-		std::cout << (palignedInts + sizeof(AlignedInt) * i)->aint << ' ' << isAligned(((std::size_t) palignedInts + sizeof(AlignedInt) * i), intAlignment) << '\n';
-	// it's aligned!
+	//StackAllocator<AlignedInt, intAlignment> LA{ 10000 };
+	//AlignedInt* palignedInts = LA.allocate(64);
+	//// TODO: EXCEPTION HERE
+	//for (int i = 0; i < 64; i++)
+	//	(palignedInts + sizeof(AlignedInt) * i)->aint = i;
+	//for (int i = 0; i < 64; i++)
+	//	std::cout << (palignedInts + sizeof(AlignedInt) * i)->aint << ' ' << isAligned(((std::size_t) palignedInts + sizeof(AlignedInt) * i), intAlignment) << '\n';
+	//// it's aligned!
 
 	
 	std::cout << "\nMap with Scoped Allocator adaptor" << '\n';
@@ -213,5 +214,6 @@ int main()
 		std::cout << (saloc4 == saloc5) << '\n';		// true!
 	}// die!
 
-	return EXIT_SUCCESS;
+	std::system( "pause" );
+	return 0;
 }

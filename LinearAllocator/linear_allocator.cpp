@@ -8,7 +8,7 @@
 #include "linear_allocator.h"
 
 
-template<typename T, std::size_t TAlignment = alignof(std::max_align_t)>
+template<typename T, std::size_t TAlignment = alignof( std::max_align_t )>
 using SA = std::scoped_allocator_adaptor<LinearAllocator<T, TAlignment>>;
 
 int main()
@@ -182,5 +182,10 @@ int main()
 	}
 
 	for (const auto& a : govector)
+	{
 		std::cout << a.x << ' ' << a.y << ' ' << a.z << ' ' << a.cost << '\n';
+	}
+
+	std::system( "pause" );
+	return 0;
 }
