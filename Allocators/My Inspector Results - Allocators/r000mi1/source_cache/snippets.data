@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<snippets>
+  <file name="f:\dd\vctools\crt\crtw32\stdhpp\fstream" md5="2b10cd4d90d0470ce795c8ba0f6111c9">
+    <snippet line="637">
+      <line line="634">            if (0 &lt; _Count &amp;&amp; _Myfile)</line>
+      <line line="635">                {    // open C stream, attempt write</line>
+      <line line="636">                _Count -= _CSTD fwrite(_Ptr, sizeof(_Elem), static_cast&lt;size_t&gt;(_Count), _Myfile);</line>
+      <line line="637">                }</line>
+      <line line="638"/>
+    </snippet>
+  </file>
+  <file name="f:\dd\vctools\crt\crtw32\stdhpp\xlocinfo" md5="99ab17795629d1626d15c46c38cabafa">
+    <snippet line="95">
+      <line line="92">    __CLR_OR_THIS_CALL ~_Locinfo() noexcept</line>
+      <line line="93">        {    // destroy the object</line>
+      <line line="94">        _Locinfo_dtor(this);</line>
+      <line line="95">        }</line>
+      <line line="96"/>
+    </snippet>
+  </file>
+</snippets>

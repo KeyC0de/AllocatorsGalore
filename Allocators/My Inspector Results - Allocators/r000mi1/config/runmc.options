@@ -1,0 +1,17 @@
+-r
+j:\NikosL91\Documents\Visual_Studio_Projects\allocators\Allocators\My Inspector Results - Allocators\r000mi1
+--no-check-invalid-access
+--no-analyze-stack
+--leak-maximum=100000
+--leak-check-only
+--leak-check-on-exit
+--check-resource-leaks
+--leak-check-report-reachable
+--freelist-vol=0
+--guard-zone-size=0
+--stack-depth=8
+--no-close-console
+--mrte-mode=auto
+--heartbeat=1
+--
+j:\NikosL91\Documents\Visual_Studio_Projects\allocators\x64\Release\Allocators.exe

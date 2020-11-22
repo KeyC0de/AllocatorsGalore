@@ -1,0 +1,50 @@
+8836	pre_c_initialization:
+8836	push rbx
+8838	sub rsp, 0x20
+8842	mov ecx, 0x1
+8847	call 0x3022 <_set_app_type>
+8852	call 0x2b3c <_get_startup_file_mode>
+8857	mov ecx, eax
+8859	call 0x3058 <_set_fmode>
+8864	call 0x3088 <__p__commode>
+8869	mov rbx, rax
+8872	call 0x1180 <?_Get_deleter@_Ref_count_base@std@@UEBAPEAXAEBVtype_info@@@Z>
+8877	mov ecx, 0x1
+8882	mov dword ptr [rbx], eax
+8884	call 0x285c <__scrt_initialize_onexit_tables>
+8889	test al, al
+8891	jz 0x2330
+8893	call 0x2d9c <_RTC_Initialize>
+8898	lea rcx, ptr [rip+0xb0f] <_RTC_Terminate>
+8905	call 0x2a70 <atexit>
+8910	call 0x2b34 <_get_startup_argv_mode>
+8915	mov ecx, eax
+8917	call 0x302e <_configure_narrow_argv>
+8922	test eax, eax
+8924	jnz 0x2330
+8926	call 0x2b44 <?__scrt_initialize_type_info@@YAXXZ>
+8931	call 0x2b88 <__scrt_is_user_matherr_present>
+8936	test eax, eax
+8938	jz 0x22f8
+8940	lea rcx, ptr [rip-0x1173] <?_Get_deleter@_Ref_count_base@std@@UEBAPEAXAEBVtype_info@@@Z>
+8947	call 0x3028 <__setusermatherr>
+8952	call 0x2b58 <_guard_check_icall_nop>
+8957	call 0x2b58 <_guard_check_icall_nop>
+8962	call 0x1180 <?_Get_deleter@_Ref_count_base@std@@UEBAPEAXAEBVtype_info@@@Z>
+8967	mov ecx, eax
+8969	call 0x307c <_configthreadlocale>
+8974	call 0x2b54 <_should_initialize_environment>
+8979	test al, al
+8981	jz 0x231c
+8983	call 0x3034 <_initialize_narrow_environment>
+8988	call 0x1180 <?_Get_deleter@_Ref_count_base@std@@UEBAPEAXAEBVtype_info@@@Z>
+8993	call 0x2cf8 <__scrt_initialize_mta>
+8998	test eax, eax
+9000	jnz 0x2330
+9002	add rsp, 0x20
+9006	pop rbx
+9007	ret 
+9008	mov ecx, 0x7
+9013	call 0x2bac <__scrt_fastfail>
+9018	int3 
+9019	int3 

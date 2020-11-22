@@ -1,0 +1,41 @@
+
+=== Start: [2018/10/28 11:02:02] === 
+Analysis started...
+Result file: j:\NikosL91\Documents\Visual_Studio_Projects\allocators\Allocators\My Inspector Results - Allocators\r000mi1\r000mi1.inspxe 
+Analysis started for j:\NikosL91\Documents\Visual_Studio_Projects\allocators\x64\Release\Allocators.exe (pid = 8240) 
+Loaded module: j:\NikosL91\Documents\Visual_Studio_Projects\allocators\x64\Release\Allocators.exe, address range [0x7ff680460000-0x7ff68046afff] 
+Loaded module: C:\Program Files (x86)\IntelSWTools\Inspector 2018\bin64\dnclrprof.dll, address range [0x7ff802120000-0x7ff80216dfff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\SspiCli.dll, address range [0x7ff81a680000-0x7ff81a6adfff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\KERNELBASE.dll, address range [0x7ff81a9f0000-0x7ff81ab05fff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\IMM32.DLL, address range [0x7ff81c110000-0x7ff81c145fff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\USER32.dll, address range [0x7ff81c150000-0x7ff81c2c6fff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\MSCTF.dll, address range [0x7ff81c2d0000-0x7ff81c420fff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\ADVAPI32.dll, address range [0x7ff81c490000-0x7ff81c539fff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\RPCRT4.dll, address range [0x7ff81c600000-0x7ff81c73ffff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\ole32.dll, address range [0x7ff81c740000-0x7ff81c8d3fff], minimal analysis 
+Loaded module: C:\WINDOWS\SYSTEM32\sechost.dll, address range [0x7ff81c940000-0x7ff81c998fff] 
+Loaded module: C:\WINDOWS\system32\GDI32.dll, address range [0x7ff81cce0000-0x7ff81ce2bfff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\KERNEL32.DLL, address range [0x7ff81ce90000-0x7ff81cfcdfff], minimal analysis 
+Loaded module: C:\WINDOWS\SYSTEM32\combase.dll, address range [0x7ff81d1b0000-0x7ff81d3c1fff], minimal analysis 
+Loaded module: C:\WINDOWS\system32\msvcrt.dll, address range [0x7ff81d3e0000-0x7ff81d489fff], minimal analysis 
+Loaded module: C:\WINDOWS\SYSTEM32\ntdll.dll, address range [0x7ff81d490000-0x7ff81d63cfff], minimal analysis 
+Loaded module: C:\WINDOWS\SYSTEM32\MSVCP140.dll, address range [0x7ff802030000-0x7ff8020cafff] 
+Loaded module: C:\WINDOWS\SYSTEM32\VCRUNTIME140.dll, address range [0x7ff816310000-0x7ff816325fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-runtime-l1-1-0.dll, address range [0x7ff816370000-0x7ff816373fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-heap-l1-1-0.dll, address range [0x7ff8162e0000-0x7ff8162e2fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-math-l1-1-0.dll, address range [0x7ff8162d0000-0x7ff8162d4fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-stdio-l1-1-0.dll, address range [0x7ff816300000-0x7ff816303fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-locale-l1-1-0.dll, address range [0x7ff8162c0000-0x7ff8162c2fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-string-l1-1-0.dll, address range [0x7ff8162f0000-0x7ff8162f3fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-convert-l1-1-0.dll, address range [0x7ff8162b0000-0x7ff8162b3fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-time-l1-1-0.dll, address range [0x7ff8162a0000-0x7ff8162a2fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-filesystem-l1-1-0.dll, address range [0x7ff816280000-0x7ff816282fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-environment-l1-1-0.dll, address range [0x7ff816150000-0x7ff816152fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\api-ms-win-crt-utility-l1-1-0.dll, address range [0x7ff815930000-0x7ff815932fff] 
+Loaded module: C:\WINDOWS\SYSTEM32\ucrtbase.DLL, address range [0x7ff813c00000-0x7ff813cf4fff] 
+Process j:\NikosL91\Documents\Visual_Studio_Projects\allocators\x64\Release\Allocators.exe exited with code 0. Leak analysis starting. Please wait... 
+Completed analysis for j:\NikosL91\Documents\Visual_Studio_Projects\allocators\x64\Release\Allocators.exe 
+Application exit code: 0 
+Result file: j:\NikosL91\Documents\Visual_Studio_Projects\allocators\Allocators\My Inspector Results - Allocators\r000mi1\r000mi1.inspxe 
+Analysis completed
+=== End: [2018/10/28 11:02:37] === 
