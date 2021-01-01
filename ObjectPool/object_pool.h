@@ -11,11 +11,12 @@
 // \date	3-Oct-19
 //
 //
-// \brief	This is NOT thread safe.You should create a different instance for each thread(suggested) 
-//				or find some way of scheduling queries to the allocator.
+// \brief	This is NOT thread safe.
+//			You should create a different instance for each thread (recommended) 
+//			or find some way of scheduling queries to the allocator.
 //=============================================================
 template<typename T>
-class ObjectPool
+class ObjectPool final
 {
 	union Object
 	{
@@ -46,7 +47,6 @@ public:
 	}
 
 	~ObjectPool() noexcept = default;
-
 	ObjectPool( const ObjectPool& rhs ) = delete;
 	ObjectPool& operator=( const ObjectPool& rhs ) = delete;
 
@@ -58,10 +58,10 @@ public:
 	{
 		rhs.m_nextFree = nullptr;
 	}
-
+	
 	ObjectPool& operator=( ObjectPool&& rhs ) noexcept
 	{
-		if (this != &rhs)
+		if ( this != &rhs )
 		{
 			m_size = rhs.getSize();
 			std::swap( m_pool, rhs.m_pool );

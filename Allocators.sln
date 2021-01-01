@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Allocators", "Allocators\Allocators.vcxproj", "{2DC045C5-1100-448E-A04B-7FB97EE30D45}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leak_Checker", "..\Leak_Checker\Leak_Checker.vcxproj", "{6B57826E-B35D-42C6-9C5F-DD18855CB461}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearAllocator", "LinearAllocator\LinearAllocator.vcxproj", "{63FE9161-77DA-42CD-885A-99E14D085C14}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StackAllocator", "StackAllocator\StackAllocator.vcxproj", "{82C63312-E15E-40A3-8770-A9B0864C2C76}"
@@ -37,14 +35,6 @@ Global
 		{2DC045C5-1100-448E-A04B-7FB97EE30D45}.Release|x64.Build.0 = Release|x64
 		{2DC045C5-1100-448E-A04B-7FB97EE30D45}.Release|x86.ActiveCfg = Release|Win32
 		{2DC045C5-1100-448E-A04B-7FB97EE30D45}.Release|x86.Build.0 = Release|Win32
-		{6B57826E-B35D-42C6-9C5F-DD18855CB461}.Debug|x64.ActiveCfg = Debug|x64
-		{6B57826E-B35D-42C6-9C5F-DD18855CB461}.Debug|x64.Build.0 = Debug|x64
-		{6B57826E-B35D-42C6-9C5F-DD18855CB461}.Debug|x86.ActiveCfg = Debug|Win32
-		{6B57826E-B35D-42C6-9C5F-DD18855CB461}.Debug|x86.Build.0 = Debug|Win32
-		{6B57826E-B35D-42C6-9C5F-DD18855CB461}.Release|x64.ActiveCfg = Release|x64
-		{6B57826E-B35D-42C6-9C5F-DD18855CB461}.Release|x64.Build.0 = Release|x64
-		{6B57826E-B35D-42C6-9C5F-DD18855CB461}.Release|x86.ActiveCfg = Release|Win32
-		{6B57826E-B35D-42C6-9C5F-DD18855CB461}.Release|x86.Build.0 = Release|Win32
 		{63FE9161-77DA-42CD-885A-99E14D085C14}.Debug|x64.ActiveCfg = Debug|x64
 		{63FE9161-77DA-42CD-885A-99E14D085C14}.Debug|x64.Build.0 = Debug|x64
 		{63FE9161-77DA-42CD-885A-99E14D085C14}.Debug|x86.ActiveCfg = Debug|Win32

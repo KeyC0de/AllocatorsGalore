@@ -430,4 +430,7 @@ int main()
 	std::cout << "isAligned(ps, 16384)=" << isAligned(ps, 16384) << '\n';
 	saa.destroy(ps);
 	saa.deallocate(ps);
+
+	std::system( "pause" );
+	return 0;
 }
