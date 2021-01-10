@@ -10,7 +10,6 @@
 #include <string>
 #include <thread>
 #include <vector>
-
 #include "object_pool.h"
 #include "..\..\KeyTimer\KeyTimer\timer.h"
 //#include "..\..\Leak_Checker\assertions.cpp"

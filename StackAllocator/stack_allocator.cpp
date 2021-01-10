@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 #include "stack_allocator.h"
-
 #include <scoped_allocator>
+
 
 template<typename T, std::size_t alignment = alignof(std::max_align_t)>
 using SA = std::scoped_allocator_adaptor<StackAllocator<T, alignment>>;

@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cassert>
 
+
 constexpr bool isPowerOfTwo( const std::size_t value ) noexcept
 {
 	return ( value != 0 && ( value & ( value - 1 ) ) == 0 );

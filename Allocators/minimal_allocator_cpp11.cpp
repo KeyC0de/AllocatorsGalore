@@ -4,6 +4,7 @@
 #include <deque>
 #include "minimal_allocator_cpp11.h"
 
+
 int main()
 {
 	[[maybe_unused]]

@@ -4,9 +4,9 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include <scoped_allocator>
 #include "stack_allocator_thread_safe.h"
 
-#include <scoped_allocator>
 
 template<typename T, std::size_t alignment = alignof(std::max_align_t)>
 using SA = std::scoped_allocator_adaptor<StackAllocatorTS<T, alignment>>;

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 
-constexpr const std::size_t n = 10;
 
+constexpr const std::size_t n = 10;
 
 int main()
 {

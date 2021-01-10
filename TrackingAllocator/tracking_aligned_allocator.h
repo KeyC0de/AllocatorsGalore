@@ -130,7 +130,7 @@ public:
 		if ( count > max_size() )
 		{
 			throw std::length_error( "TrackingAlignedAllocator<T,alignment>::allocate\
- - Invalid argument - Integer Overflow");
+ - Invalid argument - Integer Overflow" );
 		}
 		
 		void_pointer p = alignedMalloc( sizeof(T) * count,

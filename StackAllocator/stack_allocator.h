@@ -3,6 +3,7 @@
 #include <cassert>
 #include "../AlignedAllocator/aligned_allocations.h"
 
+
 template<std::size_t tm_alignment = alignof( std::max_align_t )>
 class SArena
 {

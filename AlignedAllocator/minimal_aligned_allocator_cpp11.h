@@ -4,6 +4,7 @@
 #include <cstddef>
 #include "aligned_allocations.h"
 
+
 //======================================================================
 // minimal stateless aligned allocator
 // C++11 and onwards compatible
