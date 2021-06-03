@@ -267,7 +267,7 @@ Memory pools, also called fixed-size blocks allocation, is the use of pools for 
 
 ## Object Pool & Pool Allocator
 
-The object pool pattern is a software creational design pattern that uses a set of initialized objects kept ready to use – a "pool" – rather than allocating and destroying them on demand. A client of the pool will request an object from the pool and perform operations on the returned object. When the client has finished, it returns the object to the pool rather than destroying it; this can be done manually or automatically. An object pool should be used for objects that are more expensive to create or destroy than to re-use.
+The object pool pattern is a software creational design pattern that uses a set of initialized objects kept ready to use - a "pool" - rather than allocating and destroying them on demand. A client of the pool will request an object from the pool and perform operations on the returned object. When the client has finished, it returns the object to the pool rather than destroying it; this can be done manually or automatically. An object pool should be used for objects that are more expensive to create or destroy than to re-use.
 
 Object pools employ one of three strategies to handle a request when there are no spare objects in the pool.
 
@@ -452,7 +452,7 @@ However, when allocators are stateful, the situation is more complicated. We dis
 2. Assignment (copy and move assignment). When you say `x1 = x2`, or more interestingly yet, `x1 = std::move(x2)`, you have to decide whether x1 is supposed to take the allocator from x2 or to keep its own allocator. Either choice has advantages and disadvantages in the case where the two allocators are not equal, and so neither one can deallocate the other one's memory. If the allocator is reassigned, then it may be necessary to deallocate the currently held data with the old allocator first, and allocate new memory with the newly assigned allocator, rather than keeping the existing memory and just reassigning the element values. On the other hand, if the allocator is reassigned, move-assignment is efficient, since the entire internal allocation can just be moved over to x1. If the allocator is not reassigned, move-assignment would require an actual element-by-element copy. The desired policy is chosen by means of the types `AllocTraits::propagate_on_container_copy_assignment` ("POCCA") and `AllocTraits::propagate_on_container_move_assignment` ("POCMA"), which are either `std::true_type` or `std::false_type`. Note that this choice is made per allocator type, not per object.
 3. Swap. The same considerations apply in principle as for assignment, and the controlling trait is `AllocTraits::propagate_on_container_swap` ("POCS"). However, the standard library container requirements mandate that POCS is either true, or that otherwise the allocators of the containers that are to be swapped compare equal. If this were not required, then swapping with unequal, unswapped allocators could not preserve iterators.
 
-For more on this and relevant subjects see Thomas Köppe articles on the subject (link below).
+For more on this and relevant subjects see Thomas K&#246;ppe articles on the subject (link below).
 
 I recommend you combine this with a Leak Checker (like my own [here](https://github.com/KeyC0de/WindowsLeakChecker))facility to see first hand there are no memory leaks in any allocator.
 
@@ -479,4 +479,4 @@ website: *www.keyc0de.net*
 
 gamedev.net [post](https://www.gamedev.net/tutorials/programming/general-and-gameplay-programming/c-custom-memory-allocation-r3010/)</br>
 C++11 Allocator Requirements cppreference [page](https://en.cppreference.com/w/cpp/named_req/Allocator)
-Thomas Köppe [articles](https://rawgit.com/google/cxx-std-draft/allocator-paper/allocator_example_container.html)
+Thomas K&#246;ppe [articles](https://rawgit.com/google/cxx-std-draft/allocator-paper/allocator_example_container.html)
