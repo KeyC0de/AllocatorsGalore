@@ -18,9 +18,18 @@
     <ClCompile Include="minimal_allocator_cpp11.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\assertions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="minimal_allocator_cpp11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\allocator_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assertions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

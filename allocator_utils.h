@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstddef>
-#include <cassert>
+#include "assertions.h"
 
 
 constexpr bool isPowerOfTwo( const std::size_t value ) noexcept
@@ -15,6 +15,7 @@ bool isAligned( const volatile void *p,
 {
 	return ( reinterpret_cast<std::uintptr_t>( p ) % alignment ) == 0;
 }
+
 bool isAligned( std::uintptr_t pi,
 	std::size_t alignment )
 {
@@ -81,7 +82,7 @@ const std::size_t getForwardPaddingWithHeader( const std::size_t p,
 
 	if ( padding < neededSpace )
 	{
-		// Header does not fit - Calculate next aligned address that header fits
+		// Header does not fit - Calculate m_pNext aligned address that header fits
 		neededSpace -= padding;
 
 		// How many alignments I need to fit the header        
@@ -104,7 +105,8 @@ T* alignPtr( const T *ptr,
 	const std::uintptr_t uintPtr = reinterpret_cast<std::uintptr_t>( ptr );
 	const std::uintptr_t alignedUintPtr = ( uintPtr + ( alignment - 1 ) ) & ~( alignment - 1 );
 	T* alignedPtr = reinterpret_cast<T*>( alignedUintPtr );
-	assert( isAligned( alignedPtr, alignment ) );
+	ASSERT( isAligned( alignedPtr, alignment ),
+		"Not aligned!" );
 	return alignedPtr;
 }
 
@@ -112,9 +114,11 @@ T* alignPtr( const T *ptr,
 // store malloced address in `pmem`
 // compute aligned address `palignedMem` by adding the `bytesForAdjustment` to malloced `pmem` address
 // TODO: doesn't work properly
-void* _alignedMalloc(std::size_t bytes, std::size_t alignment)
+void* _alignedMalloc( std::size_t bytes,
+	std::size_t alignment )
 {
-	assert( false );
+	ASSERT( false,
+		"Never should have come here!" );
 	void *pmem = nullptr;
 	std::size_t bytesForAlignment = alignment - 1 + sizeof(void*);
 	if ( ( pmem = static_cast<void*>( ::operator new( bytes + bytesForAlignment ) ) ) == nullptr )
@@ -131,7 +135,8 @@ void* _alignedMalloc(std::size_t bytes, std::size_t alignment)
 
 void _alignedFree( void *p ) noexcept
 {
-	assert(false);
+	ASSERT( false,
+		"Never should have come here!" );
 	::operator delete( static_cast<void**>( p )[-1] );
 }
 
@@ -152,7 +157,8 @@ void* alignedMalloc( std::size_t count,
 		throw std::bad_alloc();	// p = 0
 	}
 #endif
-	assert( isAligned( p, alignment ) );
+	ASSERT( isAligned( p, alignment ),
+		"Memory not properly aligned!" );
 	return p;
 };	//  The address of the allocated memory (returned by p) will be a multiple of alignment, which must be a power of two and a multiple of sizeof(void *)
 

@@ -108,7 +108,7 @@ int stressTest()
 				"General of the Phoelix legions.\n"
 				"Loyal servant to the true emperor, Marcus Aurelius.\n"
 				"Father to a murdered son, husband to a murdered wife\n"
-				" and I will have my vengeance, in this life or the next.\n", sa };
+				" and I will have my vengeance, in this life or the m_pNext.\n", sa };
 	std::cout << s1 << '\n';
 	std::cout << s2 << '\n';
 
@@ -222,16 +222,20 @@ int main()
 {
 	std::cout << std::boolalpha << '\n';
 
-	std::vector<std::thread> threads{ std::thread::hardware_concurrency() };
+	std::vector<std::thread> threads{std::thread::hardware_concurrency()};
 
 	for ( auto& t : threads )
 	{
-		t = std::thread{ stressTest };
+		t = std::thread{stressTest};
 	}
 
 	for( auto& t : threads )
+	{
 		if ( t.joinable() )
+		{
 			t.join();
+		}
+	}
 
 	std::system( "pause" );
 	return 0;

@@ -2,8 +2,6 @@
 #include <string>
 
 
-constexpr const std::size_t n = 10;
-
 int main()
 {
 	std::allocator<std::string> alloc;
@@ -23,12 +21,15 @@ int main()
 	// 2. construction (placement new)
 	// 3. destruction (::operator delete or free)
 	// 4. deallocation (placement delete)
-	auto* p = alloc.allocate(6);
-	alloc.construct( p, "Whatever" );
+	constexpr const std::size_t n = sizeof std::string;
+	auto* p = alloc.allocate( n );
+	alloc.construct( p,
+		"Whatever" );
 	std::cout << *p << '\n';
 	alloc.destroy( p );
-	alloc.deallocate( p, n );
+	alloc.deallocate( p,
+		n );
 
 	std::system( "pause" );
-	return 0;
+	return EXIT_SUCCESS;
 }

@@ -121,10 +121,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\assertions.cpp" />
     <ClCompile Include="minimal_aligned_allocator_cpp11.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="aligned_allocations.h" />
+    <ClInclude Include="..\allocator_utils.h" />
+    <ClInclude Include="..\assertions.h" />
     <ClInclude Include="minimal_aligned_allocator_cpp11.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

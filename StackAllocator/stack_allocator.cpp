@@ -108,7 +108,7 @@ int main()
 				"General of the Phoelix legions.\n"
 				"Loyal servant to the true emperor, Marcus Aurelius.\n"
 				"Father to a murdered son, husband to a murdered wife\n"
-				" and I will have my vengeance, in this life or the next.\n", sa };
+				" and I will have my vengeance, in this life or the m_pNext.\n", sa };
 	std::cout << s1 << '\n';
 	std::cout << s2 << '\n';
 

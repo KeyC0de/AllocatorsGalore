@@ -121,9 +121,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\assertions.cpp" />
     <ClCompile Include="stack_allocator_thread_safe.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\allocator_utils.h" />
+    <ClInclude Include="..\assertions.h" />
     <ClInclude Include="stack_allocator_thread_safe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

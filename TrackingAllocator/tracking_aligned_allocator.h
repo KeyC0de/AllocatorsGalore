@@ -1,22 +1,25 @@
 #pragma once
+
 #include <memory>
 #include <cstddef>
 #include <limits>
-#include "../AlignedAllocator/aligned_allocations.h"
+#include "../allocator_utils.h"
+#include "../assertions.h"
 
-//-------------------------------------------------------------------------------------------------
-// \class TrackingAlignedAllocator
+
+//----------------------------------------------------------------------------------------
+//	\class		TrackingAlignedAllocator
 //	
-//	\author Nikos Lazaridis (KeyC0de)
-//	\version 1.0
-//	\date 27/9/2019
+//	\author		Nikos Lazaridis (KeyC0de)
+//	\version	1.0
+//	\date		27/9/2019
 //
-//	only the address of the first byte is guaranteed to be aligned to boundary specified
-//	C++03 + compatible allocator with tracking apability
-//		- tracking the amount of allocation calls
-//-------------------------------------------------------------------------------------------------
-template<typename T,
-	std::size_t alignment = alignof( std::max_align_t )>
+//	\brief	only the address of the first byte is guaranteed to be aligned to
+//				boundary specified
+//			C++03 + compatible allocator with tracking capability
+//				ie. tracking the amount of allocation calls
+//----------------------------------------------------------------------------------------
+template<typename T, std::size_t alignment = alignof( std::max_align_t )>
 class TrackingAlignedAllocator final
 {
 	static_assert( isPowerOfTwo( alignment ),
@@ -41,39 +44,43 @@ public:
 private:
 	std::size_t m_nAllocations;
 public:
-	// required
 	TrackingAlignedAllocator()
 		:
-		m_nAllocations{ 0 }	
-	{}
+		m_nAllocations{0}	
+	{
+
+	}
 
 	~TrackingAlignedAllocator()
-	{}
+	{
+
+	}
 
 	// \struct Rebinding constructor - required
 	//[[deprecated("rebind is deprecated in C++17 and will be removed in C++20")]]
-	template<typename Other,
-		std::size_t OtherAlignment = alignof( std::max_align_t )>
+	template<typename Other, std::size_t OtherAlignment = alignof( std::max_align_t )>
 	struct rebind
 	{
 		using other = TrackingAlignedAllocator<Other, OtherAlignment>;
 	};
 	
-	// copy constructors - required
 	TrackingAlignedAllocator( TrackingAlignedAllocator& rhs ) noexcept
 		:
-		m_nAllocations{ rhs.getAllocations() }
-	{}
-	template<typename Other,
-		std::size_t OtherAlignment>
+		m_nAllocations{rhs.getAllocations()}
+	{
+
+	}
+
+	template<typename Other, std::size_t OtherAlignment>
 	TrackingAlignedAllocator( const TrackingAlignedAllocator<Other,
 			OtherAlignment>& rhs ) noexcept
 		:
-		m_nAllocations{ rhs.getAllocations() }
-	{}
-	// copy assignment operator
-	template<typename Other,
-		std::size_t OtherAlignment>
+		m_nAllocations{rhs.getAllocations()}
+	{
+
+	}
+
+	template<typename Other, std::size_t OtherAlignment>
 	TrackingAlignedAllocator& operator=( TrackingAlignedAllocator<Other,
 			OtherAlignment>& rhs ) noexcept
 	{
@@ -81,19 +88,22 @@ public:
 		return *this;
 	}
 
-	// move ctors
 	TrackingAlignedAllocator( TrackingAlignedAllocator&& rhs ) noexcept
 		:
-		m_nAllocations{ rhs.getAllocations() }
-	{}
-	template<typename Other,
-		std::size_t OtherAlignment>
+		m_nAllocations{rhs.getAllocations()}
+	{
+
+	}
+
+	template<typename Other, std::size_t OtherAlignment>
 	TrackingAlignedAllocator( TrackingAlignedAllocator<Other,
 			OtherAlignment>&& rhs ) noexcept
 		:
-		m_nAllocations{ rhs.getAllocations() }
-	{}
-	// move assignment operator
+		m_nAllocations{rhs.getAllocations()}
+	{
+
+	}
+
 	template<typename Other, std::size_t OtherAlignment>
 	TrackingAlignedAllocator& operator=( TrackingAlignedAllocator<Other,
 			OtherAlignment>&& rhs ) noexcept
@@ -106,6 +116,7 @@ public:
 	{
 		return &r;
 	}
+	
 	const T* address( const T& cr ) const
 	{
 		return &cr;
@@ -113,9 +124,9 @@ public:
 
 	constexpr std::size_t getAlignment() const noexcept
 	{
-		return ( alignment > sizeof( void* ) )
-			? alignment
-			: sizeof( void* );
+		return ( alignment > sizeof( void* ) ) ?
+			alignment :
+			sizeof( void* );
 	}
 
 	// allocates count * sizeof(T) bytes aligned to specified alignment - required
@@ -124,13 +135,14 @@ public:
 	{
 		if ( count == 0 )
 		{
-			//assert(false);
+			ASSERT( false,
+				"NEVER!" );
 			throw std::bad_alloc{};
 		}
 		if ( count > max_size() )
 		{
-			throw std::length_error( "TrackingAlignedAllocator<T,alignment>::allocate\
- - Invalid argument - Integer Overflow" );
+			throw std::length_error{"TrackingAlignedAllocator<T,alignment>::allocate\
+ - Invalid argument - Integer Overflow"};
 		}
 		
 		void_pointer p = alignedMalloc( sizeof(T) * count,
@@ -138,6 +150,7 @@ public:
 		++m_nAllocations;
 		return static_cast<T*>( p );
 	}
+
 	template <typename U>
 	T* allocate( const std::size_t count,
 		[[maybe_unused]] const U hint )
@@ -154,27 +167,27 @@ public:
 		alignedFree( p );
 	}
 
-	// `args` are the constructor arguments for the object of type `J`
+	// `args` are the constructor arguments for the object of type `U`
 	//[[deprecated( "construct() is deprecated in C++17 and will be removed in C++20" )]]
-	template<typename J, typename... Args>
-	void construct( J* p,
-		Args&&... args ) const
+	template<typename U, typename... TArgs>
+	void construct( U* p,
+		TArgs&&... args ) const
 	{
-		new( p ) J( std::forward<Args>( args )... );
+		new( p ) U( std::forward<TArgs>( args )... );
 	}
 
 	//[[deprecated( "destroy() is deprecated in C++17 and will be removed in C++20" )]]
-	template<typename J>
-	void destroy(J* p) const noexcept
+	template<typename U>
+	void destroy( U* p ) const noexcept
 	{
-		p->~J();
+		p->~U();
 	}
 
-	template<typename... Args>
+	template<typename... TArgs>
 	void construct( T* const p,
-		Args&&... args ) const
+		TArgs&&... args ) const
 	{
-		new( p ) T( std::forward<Args>( args )... );
+		new( p ) T( std::forward<TArgs>( args )... );
 	}
 
 	void destroy( T* const p ) const noexcept
@@ -198,19 +211,14 @@ public:
 };
 
 // compares two allocator objects
-template<typename T,
-	std::size_t alignment1,
-	typename Other,
-	std::size_t alignment2>
+template<typename T, std::size_t alignment1, typename Other, std::size_t alignment2>
 inline bool operator==( const TrackingAlignedAllocator<T, alignment1>&,
 	const TrackingAlignedAllocator<Other, alignment2>& ) noexcept
 {
 	return true;
 }
 
-template<typename T,
-	std::size_t alignment1,
-	typename Other, std::size_t alignment2>
+template<typename T, std::size_t alignment1, typename Other, std::size_t alignment2>
 inline bool operator!=( const TrackingAlignedAllocator<T, alignment1>&,
 	const TrackingAlignedAllocator<Other, alignment2>& ) noexcept
 {

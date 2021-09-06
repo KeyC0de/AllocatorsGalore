@@ -11,12 +11,16 @@
 #include <thread>
 #include <vector>
 #include "object_pool.h"
-#include "..\..\KeyTimer\KeyTimer\timer.h"
+#include "..\..\KeyTimer\KeyTimer\key_timer.h"
 //#include "..\..\Leak_Checker\assertions.cpp"
 //#include "..\..\Leak_Checker\leak_checker.cpp"
+#if defined _DEBUG && !defined NDEBUG
+#	include <vld.h>
+#endif
 
 //	template<typename T>
 //using SA = std::scoped_allocator_adaptor<ObjectPool<T>>;
+
 
 struct GameObject
 {
@@ -24,16 +28,27 @@ struct GameObject
 	int m_cost;
 
 	GameObject() = default;
-	GameObject(int x, int y, int z, int cost)
-		: x_(x), y_(y), z_(z), m_cost(cost)
-	{}
+	GameObject( int x, int y, int z, int cost )
+		:
+		x_(x),
+		y_(y),
+		z_(z),
+		m_cost(cost)
+	{
+
+	}
 };
 
-struct Elf : GameObject
+struct Elf
+	: GameObject
 {
+	std::string m_cry = "\nA hymn for Gandalf\n";
+
 	Elf() = default;
-	Elf(int x, int y, int z, int cost)
-		: GameObject(x, y, z, cost)
+
+	Elf( int x, int y, int z, int cost )
+		:
+		GameObject(x, y, z, cost)
 	{
 		std::cout << "Elf created" << '\n';
 	}
@@ -42,12 +57,15 @@ struct Elf : GameObject
 	{
 		std::cout << "Elf destroyed" << '\n';
 	}
-	std::string m_cry = "\nA hymn for Gandalf\n";
 };
 
-struct Dwarf : GameObject
+struct Dwarf
+	: GameObject
 {
+	std::string m_cry = "\nFind more cheer in a graveyard\n";
+
 	Dwarf() = default;
+	
 	Dwarf(int x, int y, int z, int cost)
 		: GameObject(x, y, z, cost)
 	{
@@ -58,18 +76,17 @@ struct Dwarf : GameObject
 	{
 		std::cout << "dwarf destroyed" << '\n';
 	}
-	std::string m_cry = "\nFind more cheer in a graveyard\n";
 };
 
 
 int elvenFunc()
 {
-	thread_local ObjectPool<Elf> elvenPool{ 229 };
-	for (int i = 0; i < elvenPool.getSize(); ++i)
+	thread_local ObjectPool<Elf> elvenPool{229};
+	for ( int i = 0; i < elvenPool.getSize(); ++i )
 	{
 		Elf* elf = elvenPool.construct(i, i + 1, i + 2, 100);
 		std::cout << elf->m_cry << '\n';
-		elvenPool.destroy(elf);
+		elvenPool.destroy( elf );
 	}
 
 	return 1024;
@@ -77,12 +94,12 @@ int elvenFunc()
 
 int dwarvenFunc()
 {
-	thread_local ObjectPool<Dwarf> dwarvenPool{ 256 };
-	for (int i = 0; i < dwarvenPool.getSize(); ++i)
+	thread_local ObjectPool<Dwarf> dwarvenPool{256};
+	for ( int i = 0; i < dwarvenPool.getSize(); ++i )
 	{
-		Dwarf* dwarf = dwarvenPool.construct(i - 1, i - 2, i - 3, 100);
+		Dwarf* dwarf = dwarvenPool.construct( i - 1, i - 2, i - 3, 100 );
 		std::cout << dwarf->m_cry << '\n';
-		dwarvenPool.destroy(dwarf);
+		dwarvenPool.destroy( dwarf );
 	}
 
 	return 2048;
@@ -91,22 +108,24 @@ int dwarvenFunc()
 
 int main()
 {
-	std::ios_base::sync_with_stdio(false);
-	srand(time(nullptr));
+	std::ios_base::sync_with_stdio( false );
+	srand( time( nullptr ) );
 
 	/// testing the Pool's functionality
 	std::vector<std::future<int>> vec;
 	vec.reserve(4);
-	vec.emplace_back(std::async(std::launch::async, elvenFunc));
-	vec.emplace_back(std::async(std::launch::async, dwarvenFunc));
-	vec.emplace_back(std::async(std::launch::async, elvenFunc));
-	vec.emplace_back(std::async(std::launch::async, dwarvenFunc));
+	vec.emplace_back( std::async( std::launch::async, elvenFunc ) );
+	vec.emplace_back( std::async( std::launch::async, dwarvenFunc ) );
+	vec.emplace_back( std::async( std::launch::async, elvenFunc ) );
+	vec.emplace_back( std::async( std::launch::async, dwarvenFunc ) );
 
 	int term = 0;
 	try
 	{
-		std::for_each(std::execution::par, vec.begin(), vec.end(),
-			[&term](std::future<int>& t)
+		std::for_each( std::execution::par_unseq,
+			vec.begin(),
+			vec.end(),
+			[&term]( std::future<int>& t )
 			{
 				int ret = t.get();
 				std::cout << "thread brought me " << ret << '\n';
@@ -114,7 +133,7 @@ int main()
 			}
 		);
 	}
-	catch (const std::exception& ex)
+	catch ( const std::exception& ex )
 	{
 		std::cout << ex.what() << '\n';
 	}

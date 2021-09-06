@@ -1,18 +1,18 @@
 #pragma once
 
-#include <cassert>
 #include <atomic>
 #include <memory>
-#include "../AlignedAllocator/aligned_allocations.h"
+#include "../allocator_utils.h"
+#include "../assertions.h"
 
 
-template<std::size_t tm_alignment = alignof( std::max_align_t )>
+template<std::size_t t_alignment = alignof( std::max_align_t )>
 class SArena
 {
-	static inline constexpr std::size_t s_alignment = tm_alignment;
+	static inline constexpr std::size_t m_alignment = t_alignment;
 
-	char* m_pdata;
-	std::atomic<char*> m_poffset;
+	char* m_pData;
+	std::atomic<char*> m_pOffset;
 	std::size_t m_maxSize;
 
 	struct Header final
@@ -22,13 +22,13 @@ class SArena
 public:
 	static constexpr std::size_t getAlignment() noexcept
 	{
-		return s_alignment;
+		return m_alignment;
 	}
 
 	// defctor
 	//SArena()
-	//	: m_pdata{ nullptr },
-	//	m_poffset{ nullptr },
+	//	: m_pData{ nullptr },
+	//	m_pOffset{ nullptr },
 	//	m_maxSize{ 0 }
 	//{
 	//}
@@ -36,13 +36,15 @@ public:
 	/// \attention! DO NOT malloc inside the initializer list.
 	SArena( std::size_t size )
 		:
-		m_maxSize( size )
+		m_maxSize(size)
 	{
-		assert( m_maxSize > 0 );
-		m_pdata = (char*)alignedMalloc( m_maxSize, s_alignment );
+		ASSERT( m_maxSize > 0,
+			"m_maxSize not enough!" );
+		m_pData = (char*)alignedMalloc( m_maxSize,
+			m_alignment );
 
-		m_poffset.store( m_pdata );
-		if ( m_pdata == nullptr )
+		m_pOffset.store( m_pData );
+		if ( m_pData == nullptr )
 		{
 			throw std::runtime_error( "alignedMalloc() failed" );
 		}
@@ -50,9 +52,9 @@ public:
 
 	~SArena()
 	{
-		if ( m_pdata != nullptr )
+		if ( m_pData != nullptr )
 		{
-			alignedFree( m_pdata );
+			alignedFree( m_pData );
 		}
 	}
 
@@ -65,22 +67,20 @@ public:
 	}
 	SArena& operator=( SArena&& rhs )
 	{
-		if ( this != &rhs )
+		if ( m_pData != nullptr )
 		{
-			if ( m_pdata != nullptr )
-			{
-				alignedFree( m_pdata );
-			}
-
-			m_pdata = std::move( rhs.m_pdata );
-			m_maxSize = rhs.m_maxSize;
-			m_poffset.store( rhs.m_poffset.load( std::memory_order_relaxed ) );
-
-			// destroy the other one
-			rhs.m_pdata = nullptr;
-			rhs.m_maxSize = 0;
-			rhs.m_poffset.store(nullptr);
+			alignedFree( m_pData );
 		}
+
+		m_pData = std::move( rhs.m_pData );
+		m_maxSize = rhs.m_maxSize;
+		m_pOffset.store( rhs.m_pOffset.load( std::memory_order_relaxed ) );
+
+		// destroy the other one
+		rhs.m_pData = nullptr;
+		rhs.m_maxSize = 0;
+		rhs.m_pOffset.store(nullptr);
+
 		return *this;
 	}
 
@@ -90,12 +90,13 @@ public:
 	[[nodiscard]]
 	void* allocate( std::size_t bytes )
 	{
-		assert( m_pdata != nullptr );
+		ASSERT( m_pData != nullptr,
+			"m_pData is null!" );
 
 		std::size_t currentAllocationStartAddress = alignForward(
-			(std::size_t) m_poffset.load( std::memory_order_relaxed )
+			(std::size_t) m_pOffset.load( std::memory_order_relaxed )
 			+ sizeof( Header ),
-			s_alignment );
+			m_alignment );
 
 #ifdef _DEBUG
 		std::cout << "allocating "
@@ -105,9 +106,9 @@ public:
 #endif // _DEBUG
 
 		// set the new offset
-		m_poffset.store( (char*)( currentAllocationStartAddress + bytes ) );
+		m_pOffset.store( (char*)( currentAllocationStartAddress + bytes ) );
 		// check that we haven't run out of memory
-		if ( m_poffset.load( std::memory_order_relaxed ) <= m_pdata + m_maxSize )
+		if ( m_pOffset.load( std::memory_order_relaxed ) <= m_pData + m_maxSize )
 		{
 			( (Header*)
 				( currentAllocationStartAddress - sizeof( Header ) ) )->allocationAddress
@@ -123,64 +124,70 @@ public:
 	void deallocate( void* plastAllocationAddress,
 		[[maybe_unused]] std::size_t count = 0 ) noexcept
 	{
-		//assert(m_pdata != nullptr);
+		//ASSERT( m_pData != nullptr,
+		//	"m_pData is null!" );
 		//
 		//std::size_t headerAddress = (std::size_t) plastAllocationAddress - sizeof(Header);
-		//assert(headerAddress >= (std::size_t) m_pdata && headerAddress < getEndAddress());
+		//ASSERT( headerAddress >= (std::size_t) m_pData && headerAddress < getEndAddress(),
+		//	"Invalid headerAddress." );
 		//
 		//// get the previous allocation address
 		//std::size_t allocationSize = ((Header*)headerAddress)->allocationAddress;
 		//
-		//char* expectedOffset = (char*)(headerAddress + allocationSize);
+		//char* expectedOffset = (char*)( headerAddress + allocationSize );
 		//char* desiredOffset = (char*)headerAddress;
 		//
 		//bool succeed;
-		//if (m_poffset == expectedOffset) {
-		//	m_poffset = desiredOffset;
+		//if ( m_pOffset == expectedOffset )
+		//{
+		//	m_pOffset = desiredOffset;
 		//	std::cout << "desired offset set" << '\n';
 		//	succeed = true;
 		//}
-		//else {
-		//	expectedOffset = m_poffset;
+		//else
+		//{
+		//	expectedOffset = m_pOffset;
 		//	succeed = false;
 		//}
 		// or:
-		//m_poffset.compare_exchange_strong(expectedOffset, desiredOffset);
+		//m_pOffset.compare_exchange_strong( expectedOffset,
+		//	desiredOffset );
 
 		// or:
-		*m_poffset = *(char*)( (std::size_t)plastAllocationAddress - sizeof( Header ) );
+		*m_pOffset = *(char*)( (std::size_t)plastAllocationAddress - sizeof( Header ) );
 		return;
 	}
 
 	// reset the arena. All existing allocated memory will be lost
 	void reset()
 	{
-		assert( m_pdata != nullptr );
-		m_poffset.store( m_pdata );
+		ASSERT( m_pData != nullptr,
+			"m_pData is null!" );
+		m_pOffset.store( m_pData );
 	}
 
 	std::size_t getAvailableMemory() const noexcept
 	{
-		return getEndAddress() - reinterpret_cast<std::size_t>( m_poffset.load( std::memory_order_relaxed ) );
+		return getEndAddress() - reinterpret_cast<std::size_t>( m_pOffset.load( std::memory_order_relaxed ) );
 	}
 
 	// GETTERS
 	char* getStartAddress() const noexcept
 	{
-		return m_pdata;
+		return m_pData;
 	}
 	std::size_t getCurrentAddress() const noexcept
 	{
-		return (std::size_t) m_pdata
-			+ (std::size_t) m_poffset.load( std::memory_order_relaxed );
+		return (std::size_t) m_pData
+			+ (std::size_t) m_pOffset.load( std::memory_order_relaxed );
 	}
 	std::size_t getEndAddress() const noexcept
 	{
-		return (std::size_t) m_pdata + m_maxSize;
+		return (std::size_t) m_pData + m_maxSize;
 	}
 	std::atomic<char*> getOffset() const noexcept
 	{
-		return m_poffset;
+		return m_pOffset;
 	}
 	std::size_t getMaxSize() const noexcept
 	{
@@ -195,27 +202,26 @@ public:
 // \date	01-Oct-19
 //
 // \tparam T : the type
-// \tparam tm_alignment : alignment value in bytes
+// \tparam t_alignment : alignment value in bytes
 //
 //		Thread Safe version of the Stack Allocator
 //		What makes it thread safe?
-//			1. making the top of the stack pool m_poffset atomic
+//			1. making the top of the stack pool m_pOffset atomic
 //			2. performing any write operations on it atomically
 //			3. having a shared_ptr instead of a raw pointer to the Arena
 //======================================================================
-template<typename T,
-	std::size_t tm_alignment = alignof( std::max_align_t )>
+template<typename T, std::size_t t_alignment = alignof( std::max_align_t )>
 class StackAllocatorTS
 {
-	static_assert( isPowerOfTwo( tm_alignment ),
+	static_assert( isPowerOfTwo( t_alignment ),
 		"Stack Allocator's alignment value must be a power of 2." );
 
-	template<typename U, std::size_t otherAlignment>
+	template<typename U, std::size_t t_otherAlignment>
 	friend class StackAllocatorTS;
 
-	using TSArena = SArena<tm_alignment>;
+	using TSArena = SArena<t_alignment>;
 
-	std::shared_ptr<TSArena> m_pLocalArena;
+	std::shared_ptr<TSArena> m_pArena;
 public:
 	using value_type = T;
 	using size_type = std::size_t;
@@ -225,65 +231,71 @@ public:
 	using reference = T & ;
 	using const_reference = const T&;
 
-	// defctor
 	StackAllocatorTS() noexcept
-	{}
-	// ctor
+	{
+
+	}
+
 	StackAllocatorTS( std::size_t bytes ) noexcept
 	{
-		m_pLocalArena = std::make_shared<TSArena>( bytes );
+		m_pArena = std::make_shared<TSArena>( bytes );
 	}
-	// dtor
-	~StackAllocatorTS()
-	{}
 
-	// cctors
+	~StackAllocatorTS()
+	{
+
+	}
+
 	StackAllocatorTS( const StackAllocatorTS& rhs ) noexcept
 	{// delegate to caop
 		*this = rhs;
 	}
+
 	template<typename U>
-	StackAllocatorTS( const StackAllocatorTS<U, tm_alignment>& rhs ) noexcept
+	StackAllocatorTS( const StackAllocatorTS<U, t_alignment>& rhs ) noexcept
 	{
 		*this = rhs;
 	}
 
-	// caops
 	StackAllocatorTS& operator=( const StackAllocatorTS& rhs )
 	{
-		m_pLocalArena = rhs.m_pLocalArena;
-		return *this;
-	}
-	template<typename U>
-	StackAllocatorTS& operator=( const StackAllocatorTS<U, tm_alignment>& rhs )
-	{
-		m_pLocalArena = rhs.m_pLocalArena;
+		m_pArena = rhs.m_pArena;
 		return *this;
 	}
 
-	// mctors
+	template<typename U>
+	StackAllocatorTS& operator=( const StackAllocatorTS<U, t_alignment>& rhs )
+	{
+		m_pArena = rhs.m_pArena;
+		return *this;
+	}
+
 	StackAllocatorTS( const StackAllocatorTS&& rhs ) noexcept
 		:
-		m_pLocalArena{ rhs.m_pLocalArena }
-	{}
+		m_pArena{rhs.m_pArena}
+	{
+
+	}
+
 	template<typename Other>
 	StackAllocatorTS( const StackAllocatorTS<Other>&& rhs ) noexcept
 		:
-		m_pLocalArena{ rhs.m_pLocalArena }
-	{}
+		m_pArena{rhs.m_pArena}
+	{
 
-	// rebinding ctor to another allocator of type U
+	}
+
 	template<typename U>
 	struct rebind
 	{
-		using other = StackAllocatorTS<U, tm_alignment>;
+		using other = StackAllocatorTS<U, t_alignment>;
 	};
 
-	// get the address of a reference
 	T* address( T& x ) const noexcept
 	{
 		return &x;
 	}
+
 	T* const address( const T& x ) const noexcept
 	{
 		return &x;
@@ -294,9 +306,10 @@ public:
 	T* allocate( std::size_t count,
 		[[maybe_unused]] const void* hint = nullptr )
 	{
-		assert( m_pLocalArena != nullptr );
+		ASSERT( m_pArena != nullptr,
+			"m_pArena is null!" );
 
-		void* ret = m_pLocalArena->allocate( count * sizeof( T ) );
+		void* ret = m_pArena->allocate( count * sizeof( T ) );
 		if ( ret == nullptr )
 		{
 			throw std::bad_alloc{};
@@ -308,65 +321,70 @@ public:
 	void deallocate( void* plastAllocationAddress,
 		[[maybe_unused]] std::size_t count ) noexcept
 	{
-		assert( m_pLocalArena != nullptr );
-		m_pLocalArena->deallocate( plastAllocationAddress );
+		ASSERT( m_pArena != nullptr,
+			"m_pArena is null!" );
+		m_pArena->deallocate( plastAllocationAddress );
 	}
 
-	template<typename... Args>
+	template<typename... TArgs>
 	void construct( T* p,
-		Args&&... args ) const
+		TArgs&&... args ) const
 	{
-		new( p ) T( std::forward<Args>( args )... );
+		new( p ) T( std::forward<TArgs>( args )... );
 	}
-	template<typename J, typename... Args>
-	void construct( J* p,
-		Args&&... args ) const
+
+	template<typename U, typename... TArgs>
+	void construct( U* p,
+		TArgs&&... args ) const
 	{
-		new( p ) J( std::forward<Args>( args )... );
+		new( p ) U( std::forward<TArgs>( args )... );
 	}
 
 	void destroy( T* p ) const noexcept
 	{
 		p->~T();
 	}
-	template<typename J>
-	void destroy(J* p) const noexcept
+
+	template<typename U>
+	void destroy( U* p ) const noexcept
 	{
-		p->~J();
+		p->~U();
 	}
 
 	// returns the largest possible value in Bytes that can meaningfully be passed to `allocate`
 	std::size_t max_size() const noexcept
 	{
-		assert( m_pLocalArena != nullptr );
-		return m_pLocalArena->getMaxSize();
+		ASSERT( m_pArena != nullptr,
+			"m_pArena is null!" );
+		return m_pArena->getMaxSize();
 	}
 
 	void reset()
 	{
-		assert( m_pLocalArena != nullptr );
-		m_pLocalArena->reset();
+		ASSERT( m_pArena != nullptr,
+			"m_pArena is null!" );
+		m_pArena->reset();
 	}
 
 	// get the memory pool used by this allocator
 	const TSArena& getArena() const noexcept
 	{
-		return *m_pLocalArena;
+		return *m_pArena;
 	}
 
 	std::size_t getAvailableMemory() const noexcept
 	{
-		return m_pLocalArena->getAvailableMemory();
+		return m_pArena->getAvailableMemory();
 	}
 
 	constexpr std::size_t getAlignment() const noexcept
 	{
-		return m_pLocalArena->getAlignment();
+		return m_pArena->getAlignment();
 	}
 
 	std::size_t getSize() const noexcept
 	{
-		return m_pLocalArena->getMaxSize();
+		return m_pArena->getMaxSize();
 	}
 };
 
@@ -374,18 +392,18 @@ public:
 // void specialization such that one particular allocator instance
 //	may allocate and construct different types of objects (see amap and mapstring example)
 // it is usable, but you're advised to abstain and use concrete types in all cases
-template<std::size_t tm_alignment>
-class StackAllocatorTS<void, tm_alignment>
+template<std::size_t t_alignment>
+class StackAllocatorTS<void, t_alignment>
 {
-	static_assert( isPowerOfTwo( tm_alignment ),
+	static_assert( isPowerOfTwo( t_alignment ),
 		"Stack Allocator's alignment value must be a power of 2.");
 
-	template<typename U, std::size_t otherAlignment>
+	template<typename U, std::size_t t_otherAlignment>
 	friend class StackAllocatorTS;
 
-	using TSArena = SArena<tm_alignment>;
+	using TSArena = SArena<t_alignment>;
 
-	std::shared_ptr<TSArena> m_pLocalArena;
+	std::shared_ptr<TSArena> m_pArena;
 public:
 	using value_type = void;
 	using size_type = std::size_t;
@@ -393,68 +411,75 @@ public:
 	using pointer = void*;
 	using const_pointer = void* const;
 
-	// defctor
 	StackAllocatorTS() noexcept
-	{}
-	// ctor
+	{
+
+	}
+
 	StackAllocatorTS( std::size_t bytes ) noexcept
 	{
-		m_pLocalArena = std::make_shared<TSArena>( bytes );
+		m_pArena = std::make_shared<TSArena>( bytes );
 	}
-	// dtor
-	~StackAllocatorTS()
-	{}
 
-	// cctors
+	~StackAllocatorTS()
+	{
+
+	}
+
 	StackAllocatorTS( const StackAllocatorTS& rhs ) noexcept
 	{// delegate to caop
 		*this = rhs;
 	}
+
 	template<typename U>
-	StackAllocatorTS( const StackAllocatorTS<U, tm_alignment>& rhs ) noexcept
+	StackAllocatorTS( const StackAllocatorTS<U, t_alignment>& rhs ) noexcept
 	{
 		*this = rhs;
 	}
 
-	// caops
 	StackAllocatorTS& operator=( const StackAllocatorTS& rhs )
 	{
-		m_pLocalArena = rhs.m_pLocalArena;
-		return *this;
-	}
-	template<typename U>
-	StackAllocatorTS& operator=( const StackAllocatorTS<U, tm_alignment>& rhs )
-	{
-		m_pLocalArena = rhs.m_pLocalArena;
+		m_pArena = rhs.m_pArena;
 		return *this;
 	}
 
-	// mctors
+	template<typename U>
+	StackAllocatorTS& operator=( const StackAllocatorTS<U, t_alignment>& rhs )
+	{
+		m_pArena = rhs.m_pArena;
+		return *this;
+	}
+
 	StackAllocatorTS( const StackAllocatorTS&& rhs ) noexcept
 		:
-		m_pLocalArena{ rhs.m_pLocalArena }
-	{}
+		m_pArena{rhs.m_pArena}
+	{
+
+	}
+
 	template<typename Other>
 	StackAllocatorTS( const StackAllocatorTS<Other>&& rhs ) noexcept
 		:
-		m_pLocalArena{ rhs.m_pLocalArena }
-	{}
+		m_pArena{rhs.m_pArena}
+	{
 
-	// rebinding ctor to another allocator of type U
+	}
+
 	template<typename U>
 	struct rebind
 	{
-		using other = StackAllocatorTS<U, tm_alignment>;
+		using other = StackAllocatorTS<U, t_alignment>;
 	};
 
 	[[nodiscard]]
 	void* allocate( std::size_t count,
 		const void* hint = nullptr )
 	{
-		assert( m_pLocalArena != nullptr );
+		ASSERT( m_pArena != nullptr,
+			"m_pArena is null!" );
 		std::size_t bytes = count * sizeof( void );
 
-		void* ret = m_pLocalArena->allocate( bytes );
+		void* ret = m_pArena->allocate( bytes );
 		if ( ret == nullptr )
 		{
 			throw std::bad_alloc{};
@@ -466,89 +491,85 @@ public:
 	void deallocate( void* plastAllocation,
 		[[maybe_unused]] std::size_t count = 0 )
 	{
-		assert( m_pLocalArena != nullptr );
-		m_pLocalArena->deallocate( plastAllocation );
+		ASSERT( m_pArena != nullptr,
+			"m_pArena is null!" );
+		m_pArena->deallocate( plastAllocation );
 	}
 
-	template<typename J, typename... Args>
-	void construct( J* p, Args&&... args ) const
+	template<typename U, typename... TArgs>
+	void construct( U* p, TArgs&&... args ) const
 	{
-		new( p ) J( std::forward<Args>( args )... );
+		new( p ) U( std::forward<TArgs>( args )... );
 		// or:
-		//::new (static_cast<void*>(p)) J(std::forward<Args>(args)...)
+		//::new (static_cast<void*>(p)) U(std::forward<TArgs>(args)...)
 	}
-	template<typename J>
-	void destroy( J* p ) const noexcept
+
+	template<typename U>
+	void destroy( U* p ) const noexcept
 	{
-		p->~J();
+		p->~U();
 	}
 
 	// returns the largest possible value in Bytes that can meaningfully be passed to `allocate`
 	std::size_t max_size() const
 	{
-		assert( m_pLocalArena != nullptr );
-		return m_pLocalArena->getMaxSize();
+		ASSERT( m_pArena != nullptr,
+			"m_pArena is null!" );
+		return m_pArena->getMaxSize();
 	}
 
 	// reinitialize the allocator. All existing allocated memory will be lost
 	void reset()
 	{
-		assert( m_pLocalArena != nullptr );
-		m_pLocalArena->reset();
+		ASSERT( m_pArena != nullptr,
+			"m_pArena is null!" );
+		m_pArena->reset();
 	}
 
-	// get the memory pool used by this allocator
 	const TSArena& getArena() const
 	{
-		assert( m_pLocalArena != nullptr );
-		return *m_pLocalArena;
+		ASSERT( m_pArena != nullptr,
+			"m_pArena is null!" );
+		return *m_pArena;
 	}
 
 	std::size_t getAvailableMemory() const noexcept
 	{
-		return m_pLocalArena->getAvailableMemory();
+		return m_pArena->getAvailableMemory();
 	}
 
 	std::size_t getSize() const noexcept
 	{
-		return m_pLocalArena->getMaxSize();
+		return m_pArena->getMaxSize();
 	}
 };
 
 
 // an other allocator of the same type can deallocate from this one
-template<typename T,
-	std::size_t tm_alignment,
-	std::size_t tm_otherAlignment>
-inline bool operator==( const StackAllocatorTS<T, tm_alignment>&,
-	const StackAllocatorTS<T, tm_otherAlignment>& )
+template<typename T, std::size_t t_alignment, std::size_t t_otherAlignment>
+inline bool operator==( const StackAllocatorTS<T, t_alignment>&,
+	const StackAllocatorTS<T, t_otherAlignment>& )
 {
 	return true;
 }
 // equivalent statement:
-template<typename T,
-	std::size_t tm_alignment,
-	std::size_t tm_otherAlignment>
-inline bool operator!=( const StackAllocatorTS<T, tm_alignment>&,
-	const StackAllocatorTS<T, tm_otherAlignment>& )
+template<typename T, std::size_t t_alignment, std::size_t t_otherAlignment>
+inline bool operator!=( const StackAllocatorTS<T, t_alignment>&,
+	const StackAllocatorTS<T, t_otherAlignment>& )
 {
 	return false;
 }
 
 // an other allocator of a different type cannot deallocate from this one
-template<typename T,
-	std::size_t tm_alignment,
-	typename OtherAllocator>
-inline bool operator==( const StackAllocatorTS<T, tm_alignment>&,
+template<typename T, std::size_t t_alignment, typename OtherAllocator>
+inline bool operator==( const StackAllocatorTS<T, t_alignment>&,
 	const OtherAllocator& )
 {
 	return false;
 }
 // equivalent statement:
-template<typename T,
-	std::size_t tm_alignment,
-	typename OtherAllocator>
-inline bool operator!=( const StackAllocatorTS<T, tm_alignment>&,
+template<typename T, std::size_t t_alignment, typename OtherAllocator>
+inline bool operator!=( const StackAllocatorTS<T, t_alignment>&,
 	const OtherAllocator&)
 {
 	return true;

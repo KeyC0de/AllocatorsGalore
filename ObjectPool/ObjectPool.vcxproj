@@ -19,9 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\assertions.cpp" />
     <ClCompile Include="object_pool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\allocator_utils.h" />
+    <ClInclude Include="..\assertions.h" />
     <ClInclude Include="object_pool.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

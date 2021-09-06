@@ -4,6 +4,7 @@
 #include <new>
 #include <type_traits>
 
+
 //=============================================================
 // \class	ObjectPool
 //
@@ -11,9 +12,7 @@
 // \date	3-Oct-19
 //
 //
-// \brief	This is NOT thread safe.
-//			You should create a different instance for each thread (recommended) 
-//			or find some way of scheduling queries to the allocator.
+// \brief	Pool Allocator
 //=============================================================
 template<typename T>
 class ObjectPool final
@@ -21,11 +20,12 @@ class ObjectPool final
 	union Object
 	{
 		std::aligned_storage_t<sizeof( T ), alignof( T )> m_storage;
-		Object* next;
+		Object* m_pNext;
 	};
+
 	std::unique_ptr<Object[]> m_pool;
-	Object* m_nextFree;
-	std::size_t m_size;
+	Object* m_pNextFree;
+	std::size_t m_nObjs;
 public:
 	using value_type = T;
 	using pointer = T*;
@@ -33,41 +33,40 @@ public:
 	// constructor creates the pool given its size
 	explicit ObjectPool( const std::size_t size )
 		:
-		m_pool{ std::make_unique<Object[]>( size ) },
-		m_nextFree{nullptr},
-		m_size( size )
+		m_pool{std::make_unique<Object[]>( size )},
+		m_pNextFree{nullptr},
+		m_nObjs(size)
 	{
 		for ( int i = 1; i < size; ++i )
 		{
-			m_pool[i-1].next = &m_pool[i];
+			m_pool[i - 1].m_pNext = &m_pool[i];
 		}
 
-		m_nextFree = &m_pool[0];
-		//m_nextFree->next = nullptr;
+		m_pNextFree = &m_pool[0];
 	}
 
 	~ObjectPool() noexcept = default;
+
 	ObjectPool( const ObjectPool& rhs ) = delete;
 	ObjectPool& operator=( const ObjectPool& rhs ) = delete;
 
 	ObjectPool( ObjectPool&& rhs ) noexcept
 		:
 		m_pool{std::move( rhs.m_pool )},
-		m_nextFree{rhs.m_nextFree},
-		m_size{ rhs.getSize }
+		m_pNextFree{rhs.m_pNextFree},
+		m_nObjs{rhs.getSize()}
 	{
-		rhs.m_nextFree = nullptr;
+		rhs.m_pNextFree = nullptr;
 	}
 	
 	ObjectPool& operator=( ObjectPool&& rhs ) noexcept
 	{
-		if ( this != &rhs )
-		{
-			m_size = rhs.getSize();
-			std::swap( m_pool, rhs.m_pool );
-			m_nextFree = rhs.m_nextFree;
-			rhs.m_nextFree = nullptr;
-		}
+		m_nObjs = rhs.getSize();
+		std::swap( m_pool,
+			rhs.m_pool );
+		m_pNextFree = rhs.m_pNextFree;
+		rhs.m_pNextFree = nullptr;
+
 		return *this;
 	}
 
@@ -81,6 +80,7 @@ public:
 	{
 		return &r;
 	}
+
 	const T* address( const T& r ) const noexcept
 	{
 		return &r;
@@ -90,13 +90,13 @@ public:
 	[[nodiscard]]
 	T* allocate()
 	{
-		if ( m_nextFree == nullptr )
+		if ( m_pNextFree == nullptr )
 		{
 			throw std::bad_alloc{};
 		}
 
-		const auto currentObj = m_nextFree;
-		m_nextFree = currentObj->next;
+		const auto currentObj = m_pNextFree;
+		m_pNextFree = currentObj->m_pNext;
 
 		return reinterpret_cast<T*>( &currentObj->m_storage );
 	}
@@ -106,8 +106,8 @@ public:
 		[[maybe_unused]] std::size_t count = 0 ) noexcept
 	{
 		const auto o = reinterpret_cast<Object*>( p );
-		o->next = m_nextFree;
-		m_nextFree = o;
+		o->m_pNext = m_pNextFree;
+		m_pNextFree = o;
 	}
 
 	template<typename... TArgs>
@@ -130,7 +130,7 @@ public:
 
 	std::size_t getSize() noexcept
 	{
-		return m_size;
+		return m_nObjs;
 	}
 };
 
