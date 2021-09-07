@@ -43,6 +43,8 @@ struct Elf
 	: GameObject
 {
 	std::string m_cry = "\nA hymn for Gandalf\n";
+	char c;
+	int i;
 
 	Elf() = default;
 
@@ -63,6 +65,8 @@ struct Dwarf
 	: GameObject
 {
 	std::string m_cry = "\nFind more cheer in a graveyard\n";
+	std::string m_whatever = "\nwhatever\n";
+	double d;
 
 	Dwarf() = default;
 	
