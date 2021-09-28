@@ -1,151 +1,255 @@
 Visual Leak Detector Version 2.5.1 installed.
     Outputting the report to the debugger and to C:\Users\Nikos\Documents\visual_studio_projects\Allocators\ObjectPool\memory_leak_report.txt
 WARNING: Visual Leak Detector detected memory leaks!
----------- Block 139 at 0x00000000417CEE30: 14656 bytes ----------
-  Leak Hash: 0x0DC050E8, Count: 1, Total 14656 bytes
-  Call Stack (TID 4992):
-    ntdll.dll!RtlAllocateHeap()
-    d:\agent\_work\2\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (29): ObjectPool.exe!operator new[]()
-    c:\users\nikos\documents\visual_studio_projects\allocators\objectpool\object_pool.cpp (88): ObjectPool.exe!elvenFunc() + 0x3A bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\future (556): ObjectPool.exe!std::_Packaged_state<int __cdecl(void)>::_Call_immediate() + 0x12 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\functional (16707566): ObjectPool.exe!std::_Func_impl_no_alloc<<lambda_052e919cc0e5399df76dff3972c0cac1>,unsigned char>::_Do_call() + 0xF bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\ppltasks.h (3537): ObjectPool.exe!Concurrency::task<unsigned char>::_InitialTaskHandle<void,<lambda_4fbe9631f06acbc3601e97a6bc4d7592>,Concurrency::details::_TypeSelectorNoAsync>::_Init() + 0x6E bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\ppltasks.h (1465): ObjectPool.exe!Concurrency::details::_PPLTaskHandle<unsigned char,Concurrency::task<unsigned char>::_InitialTaskHandle<void,<lambda_4fbe9631f06acbc3601e97a6bc4d7592>,Concurrency::details::_TypeSelectorNoAsync>,Concurrency::details::_TaskProcHandle>::invoke() + 0x8 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\pplwin.h (160): ObjectPool.exe!Concurrency::details::_TaskProcHandle::_RunChoreBridge() + 0xB bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\pplwin.h (51): ObjectPool.exe!Concurrency::details::_DefaultPPLTaskScheduler::_PPLTaskChore::_Callback() + 0xA bytes
-    d:\agent\_work\2\s\src\vctools\crt\crtw32\stdcpp\thr\taskscheduler.cpp (158): ObjectPool.exe!Concurrency::details::`anonymous namespace'::_Task_scheduler_callback() + 0x2C bytes
+---------- Block 30 at 0x00000000F1C01E70: 14656 bytes ----------
+  Leak Hash: 0x8E101424, Count: 1, Total 14656 bytes
+  Call Stack (TID 10236):
+    ucrtbased.dll!malloc()
+    ObjectPool.exe!0x00007FF78D09FE53()
+    ObjectPool.exe!0x00007FF78D09FEF3()
+    ObjectPool.exe!0x00007FF78D07E52F()
+    ObjectPool.exe!0x00007FF78D07FCEC()
+    ObjectPool.exe!0x00007FF78D09C7A8()
+    ObjectPool.exe!0x00007FF78D0756F4()
+    ObjectPool.exe!0x00007FF78D07DFAA()
+    ObjectPool.exe!0x00007FF78D077E96()
+    ObjectPool.exe!0x00007FF78D077D99()
+    ObjectPool.exe!0x00007FF78D089B7D()
+    ObjectPool.exe!0x00007FF78D07561A()
+    ObjectPool.exe!0x00007FF78D07DF3A()
+    ObjectPool.exe!0x00007FF78D07568A()
+    ObjectPool.exe!0x00007FF78D090699()
+    ObjectPool.exe!0x00007FF78D089CAC()
+    ObjectPool.exe!0x00007FF78D08CBA7()
+    ObjectPool.exe!0x00007FF78D0892F5()
+    ObjectPool.exe!0x00007FF78D07529A()
+    ObjectPool.exe!0x00007FF78D07DD7A()
+    ObjectPool.exe!0x00007FF78D07530A()
+    ObjectPool.exe!0x00007FF78D0904D9()
+    ObjectPool.exe!0x00007FF78D089D4C()
+    ObjectPool.exe!0x00007FF78D089225()
+    ObjectPool.exe!0x00007FF78D0751BA()
+    ObjectPool.exe!0x00007FF78D07DD0A()
+    ObjectPool.exe!0x00007FF78D07522A()
+    ObjectPool.exe!0x00007FF78D090469()
+    ObjectPool.exe!0x00007FF78D089C0C()
+    ObjectPool.exe!0x00007FF78D077F38()
+    ObjectPool.exe!0x00007FF78D093D79()
+    ObjectPool.exe!0x00007FF78D096759()
+    ObjectPool.exe!0x00007FF78D09D874()
+    ObjectPool.exe!0x00007FF78D0974D0()
+    ObjectPool.exe!0x00007FF78D08CC87()
+    MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
     ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
     ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
     KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
     ntdll.dll!RtlUserThreadStart() + 0x34 bytes
   Data:
-    70 EE 7C 41    16 00 00 00    E6 00 00 00    64 00 00 00     p.|A.... ....d...
-    00 00 00 00    00 00 00 00    00 78 7C 41    16 00 00 00     ........ .x|A....
+    B0 1E C0 F1    05 00 00 00    E6 00 00 00    64 00 00 00     ........ ....d...
+    00 00 00 00    00 00 00 00    00 9A BE F1    05 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    B0 EE 7C 41    16 00 00 00    00 00 00 00    00 00 00 00     ..|A.... ........
+    F0 1E C0 F1    05 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    F0 EE 7C 41    16 00 00 00    00 00 00 00    00 00 00 00     ..|A.... ........
+    30 1F C0 F1    05 00 00 00    00 00 00 00    00 00 00 00     0....... ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    30 EF 7C 41    16 00 00 00    00 00 00 00    00 00 00 00     0.|A.... ........
+    70 1F C0 F1    05 00 00 00    00 00 00 00    00 00 00 00     p....... ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
 
 
----------- Block 166 at 0x00000000417D6360: 26624 bytes ----------
-  Leak Hash: 0x17B14C52, Count: 1, Total 26624 bytes
-  Call Stack (TID 2504):
-    ntdll.dll!RtlAllocateHeap()
-    d:\agent\_work\2\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (29): ObjectPool.exe!operator new[]()
-    c:\users\nikos\documents\visual_studio_projects\allocators\objectpool\object_pool.cpp (101): ObjectPool.exe!dwarvenFunc() + 0x39 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\future (556): ObjectPool.exe!std::_Packaged_state<int __cdecl(void)>::_Call_immediate() + 0x12 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\functional (16707566): ObjectPool.exe!std::_Func_impl_no_alloc<<lambda_052e919cc0e5399df76dff3972c0cac1>,unsigned char>::_Do_call() + 0xF bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\ppltasks.h (3537): ObjectPool.exe!Concurrency::task<unsigned char>::_InitialTaskHandle<void,<lambda_4fbe9631f06acbc3601e97a6bc4d7592>,Concurrency::details::_TypeSelectorNoAsync>::_Init() + 0x6E bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\ppltasks.h (1465): ObjectPool.exe!Concurrency::details::_PPLTaskHandle<unsigned char,Concurrency::task<unsigned char>::_InitialTaskHandle<void,<lambda_4fbe9631f06acbc3601e97a6bc4d7592>,Concurrency::details::_TypeSelectorNoAsync>,Concurrency::details::_TaskProcHandle>::invoke() + 0x8 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\pplwin.h (160): ObjectPool.exe!Concurrency::details::_TaskProcHandle::_RunChoreBridge() + 0xB bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\pplwin.h (51): ObjectPool.exe!Concurrency::details::_DefaultPPLTaskScheduler::_PPLTaskChore::_Callback() + 0xA bytes
-    d:\agent\_work\2\s\src\vctools\crt\crtw32\stdcpp\thr\taskscheduler.cpp (158): ObjectPool.exe!Concurrency::details::`anonymous namespace'::_Task_scheduler_callback() + 0x2C bytes
+---------- Block 44 at 0x00000000F1C08470: 26624 bytes ----------
+  Leak Hash: 0xB3B9D8ED, Count: 1, Total 26624 bytes
+  Call Stack (TID 3716):
+    ucrtbased.dll!malloc()
+    ObjectPool.exe!0x00007FF78D09FE53()
+    ObjectPool.exe!0x00007FF78D09FEF3()
+    ObjectPool.exe!0x00007FF78D07E40F()
+    ObjectPool.exe!0x00007FF78D07FB6C()
+    ObjectPool.exe!0x00007FF78D09C548()
+    ObjectPool.exe!0x00007FF78D0756F4()
+    ObjectPool.exe!0x00007FF78D07DFAA()
+    ObjectPool.exe!0x00007FF78D077E96()
+    ObjectPool.exe!0x00007FF78D077D99()
+    ObjectPool.exe!0x00007FF78D089B7D()
+    ObjectPool.exe!0x00007FF78D07561A()
+    ObjectPool.exe!0x00007FF78D07DF3A()
+    ObjectPool.exe!0x00007FF78D07568A()
+    ObjectPool.exe!0x00007FF78D090699()
+    ObjectPool.exe!0x00007FF78D089CAC()
+    ObjectPool.exe!0x00007FF78D08CBA7()
+    ObjectPool.exe!0x00007FF78D0892F5()
+    ObjectPool.exe!0x00007FF78D07529A()
+    ObjectPool.exe!0x00007FF78D07DD7A()
+    ObjectPool.exe!0x00007FF78D07530A()
+    ObjectPool.exe!0x00007FF78D0904D9()
+    ObjectPool.exe!0x00007FF78D089D4C()
+    ObjectPool.exe!0x00007FF78D089225()
+    ObjectPool.exe!0x00007FF78D0751BA()
+    ObjectPool.exe!0x00007FF78D07DD0A()
+    ObjectPool.exe!0x00007FF78D07522A()
+    ObjectPool.exe!0x00007FF78D090469()
+    ObjectPool.exe!0x00007FF78D089C0C()
+    ObjectPool.exe!0x00007FF78D077F38()
+    ObjectPool.exe!0x00007FF78D093D79()
+    ObjectPool.exe!0x00007FF78D096759()
+    ObjectPool.exe!0x00007FF78D09D874()
+    ObjectPool.exe!0x00007FF78D0974D0()
+    ObjectPool.exe!0x00007FF78D08CC87()
+    MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
     ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
     ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
     KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
     ntdll.dll!RtlUserThreadStart() + 0x34 bytes
   Data:
-    C8 63 7D 41    16 00 00 00    FC 00 00 00    64 00 00 00     .c}A.... ....d...
-    00 00 00 00    00 00 00 00    00 92 7C 41    16 00 00 00     ........ ..|A....
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 77 68 61    74 65 76 65    72 0A 00 00    00 00 00 00     .whateve r.......
-    00 00 00 00    00 00 00 00    0F 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    30 64 7D 41    16 00 00 00     ........ 0d}A....
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    98 64 7D 41    16 00 00 00    00 00 00 00    00 00 00 00     .d}A.... ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-
-
----------- Block 177 at 0x00000000417DDC20: 14656 bytes ----------
-  Leak Hash: 0x0DC050E8, Count: 1, Total 14656 bytes
-  Call Stack (TID 9260):
-    ntdll.dll!RtlAllocateHeap()
-    d:\agent\_work\2\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (29): ObjectPool.exe!operator new[]()
-    c:\users\nikos\documents\visual_studio_projects\allocators\objectpool\object_pool.cpp (88): ObjectPool.exe!elvenFunc() + 0x3A bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\future (556): ObjectPool.exe!std::_Packaged_state<int __cdecl(void)>::_Call_immediate() + 0x12 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\functional (16707566): ObjectPool.exe!std::_Func_impl_no_alloc<<lambda_052e919cc0e5399df76dff3972c0cac1>,unsigned char>::_Do_call() + 0xF bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\ppltasks.h (3537): ObjectPool.exe!Concurrency::task<unsigned char>::_InitialTaskHandle<void,<lambda_4fbe9631f06acbc3601e97a6bc4d7592>,Concurrency::details::_TypeSelectorNoAsync>::_Init() + 0x6E bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\ppltasks.h (1465): ObjectPool.exe!Concurrency::details::_PPLTaskHandle<unsigned char,Concurrency::task<unsigned char>::_InitialTaskHandle<void,<lambda_4fbe9631f06acbc3601e97a6bc4d7592>,Concurrency::details::_TypeSelectorNoAsync>,Concurrency::details::_TaskProcHandle>::invoke() + 0x8 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\pplwin.h (160): ObjectPool.exe!Concurrency::details::_TaskProcHandle::_RunChoreBridge() + 0xB bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\pplwin.h (51): ObjectPool.exe!Concurrency::details::_DefaultPPLTaskScheduler::_PPLTaskChore::_Callback() + 0xA bytes
-    d:\agent\_work\2\s\src\vctools\crt\crtw32\stdcpp\thr\taskscheduler.cpp (158): ObjectPool.exe!Concurrency::details::`anonymous namespace'::_Task_scheduler_callback() + 0x2C bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
-    KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
-    ntdll.dll!RtlUserThreadStart() + 0x34 bytes
-  Data:
-    60 DC 7D 41    16 00 00 00    E6 00 00 00    64 00 00 00     `.}A.... ....d...
-    00 00 00 00    00 00 00 00    00 80 7C 41    16 00 00 00     ........ ..|A....
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    A0 DC 7D 41    16 00 00 00    00 00 00 00    00 00 00 00     ..}A.... ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    E0 DC 7D 41    16 00 00 00    00 00 00 00    00 00 00 00     ..}A.... ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    20 DD 7D 41    16 00 00 00    00 00 00 00    00 00 00 00     ..}A.... ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-
-
----------- Block 181 at 0x00000000417E22C0: 26624 bytes ----------
-  Leak Hash: 0x17B14C52, Count: 1, Total 26624 bytes
-  Call Stack (TID 1164):
-    ntdll.dll!RtlAllocateHeap()
-    d:\agent\_work\2\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (29): ObjectPool.exe!operator new[]()
-    c:\users\nikos\documents\visual_studio_projects\allocators\objectpool\object_pool.cpp (101): ObjectPool.exe!dwarvenFunc() + 0x39 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\future (556): ObjectPool.exe!std::_Packaged_state<int __cdecl(void)>::_Call_immediate() + 0x12 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\functional (16707566): ObjectPool.exe!std::_Func_impl_no_alloc<<lambda_052e919cc0e5399df76dff3972c0cac1>,unsigned char>::_Do_call() + 0xF bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\ppltasks.h (3537): ObjectPool.exe!Concurrency::task<unsigned char>::_InitialTaskHandle<void,<lambda_4fbe9631f06acbc3601e97a6bc4d7592>,Concurrency::details::_TypeSelectorNoAsync>::_Init() + 0x6E bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\ppltasks.h (1465): ObjectPool.exe!Concurrency::details::_PPLTaskHandle<unsigned char,Concurrency::task<unsigned char>::_InitialTaskHandle<void,<lambda_4fbe9631f06acbc3601e97a6bc4d7592>,Concurrency::details::_TypeSelectorNoAsync>,Concurrency::details::_TaskProcHandle>::invoke() + 0x8 bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\pplwin.h (160): ObjectPool.exe!Concurrency::details::_TaskProcHandle::_RunChoreBridge() + 0xB bytes
-    c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\pplwin.h (51): ObjectPool.exe!Concurrency::details::_DefaultPPLTaskScheduler::_PPLTaskChore::_Callback() + 0xA bytes
-    d:\agent\_work\2\s\src\vctools\crt\crtw32\stdcpp\thr\taskscheduler.cpp (158): ObjectPool.exe!Concurrency::details::`anonymous namespace'::_Task_scheduler_callback() + 0x2C bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
-    KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
-    ntdll.dll!RtlUserThreadStart() + 0x34 bytes
-  Data:
-    28 23 7E 41    16 00 00 00    FC 00 00 00    64 00 00 00     (#~A.... ....d...
-    00 00 00 00    00 00 00 00    00 8F 7C 41    16 00 00 00     ........ ..|A....
+    D8 84 C0 F1    05 00 00 00    FC 00 00 00    64 00 00 00     ........ ....d...
+    00 00 00 00    00 00 00 00    00 0E BF F1    05 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 77 68 61    74 65 76 65    72 0A 00 00    00 00 00 00     .whateve r.......
     00 00 00 00    00 00 00 00    0F 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    90 23 7E 41    16 00 00 00     ........ .#~A....
+    00 00 00 00    00 00 00 00    40 85 C0 F1    05 00 00 00     ........ @.......
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    F8 23 7E 41    16 00 00 00    00 00 00 00    00 00 00 00     .#~A.... ........
+    A8 85 C0 F1    05 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 59 at 0x00000000F1C12830: 14656 bytes ----------
+  Leak Hash: 0x8E101424, Count: 1, Total 14656 bytes
+  Call Stack (TID 9140):
+    ucrtbased.dll!malloc()
+    ObjectPool.exe!0x00007FF78D09FE53()
+    ObjectPool.exe!0x00007FF78D09FEF3()
+    ObjectPool.exe!0x00007FF78D07E52F()
+    ObjectPool.exe!0x00007FF78D07FCEC()
+    ObjectPool.exe!0x00007FF78D09C7A8()
+    ObjectPool.exe!0x00007FF78D0756F4()
+    ObjectPool.exe!0x00007FF78D07DFAA()
+    ObjectPool.exe!0x00007FF78D077E96()
+    ObjectPool.exe!0x00007FF78D077D99()
+    ObjectPool.exe!0x00007FF78D089B7D()
+    ObjectPool.exe!0x00007FF78D07561A()
+    ObjectPool.exe!0x00007FF78D07DF3A()
+    ObjectPool.exe!0x00007FF78D07568A()
+    ObjectPool.exe!0x00007FF78D090699()
+    ObjectPool.exe!0x00007FF78D089CAC()
+    ObjectPool.exe!0x00007FF78D08CBA7()
+    ObjectPool.exe!0x00007FF78D0892F5()
+    ObjectPool.exe!0x00007FF78D07529A()
+    ObjectPool.exe!0x00007FF78D07DD7A()
+    ObjectPool.exe!0x00007FF78D07530A()
+    ObjectPool.exe!0x00007FF78D0904D9()
+    ObjectPool.exe!0x00007FF78D089D4C()
+    ObjectPool.exe!0x00007FF78D089225()
+    ObjectPool.exe!0x00007FF78D0751BA()
+    ObjectPool.exe!0x00007FF78D07DD0A()
+    ObjectPool.exe!0x00007FF78D07522A()
+    ObjectPool.exe!0x00007FF78D090469()
+    ObjectPool.exe!0x00007FF78D089C0C()
+    ObjectPool.exe!0x00007FF78D077F38()
+    ObjectPool.exe!0x00007FF78D093D79()
+    ObjectPool.exe!0x00007FF78D096759()
+    ObjectPool.exe!0x00007FF78D09D874()
+    ObjectPool.exe!0x00007FF78D0974D0()
+    ObjectPool.exe!0x00007FF78D08CC87()
+    MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
+    ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
+    ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
+    KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
+    ntdll.dll!RtlUserThreadStart() + 0x34 bytes
+  Data:
+    70 28 C1 F1    05 00 00 00    E6 00 00 00    64 00 00 00     p(...... ....d...
+    00 00 00 00    00 00 00 00    00 9D BE F1    05 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    B0 28 C1 F1    05 00 00 00    00 00 00 00    00 00 00 00     .(...... ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    F0 28 C1 F1    05 00 00 00    00 00 00 00    00 00 00 00     .(...... ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    30 29 C1 F1    05 00 00 00    00 00 00 00    00 00 00 00     0)...... ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 71 at 0x00000000F1C195E0: 26624 bytes ----------
+  Leak Hash: 0xB3B9D8ED, Count: 1, Total 26624 bytes
+  Call Stack (TID 5824):
+    ucrtbased.dll!malloc()
+    ObjectPool.exe!0x00007FF78D09FE53()
+    ObjectPool.exe!0x00007FF78D09FEF3()
+    ObjectPool.exe!0x00007FF78D07E40F()
+    ObjectPool.exe!0x00007FF78D07FB6C()
+    ObjectPool.exe!0x00007FF78D09C548()
+    ObjectPool.exe!0x00007FF78D0756F4()
+    ObjectPool.exe!0x00007FF78D07DFAA()
+    ObjectPool.exe!0x00007FF78D077E96()
+    ObjectPool.exe!0x00007FF78D077D99()
+    ObjectPool.exe!0x00007FF78D089B7D()
+    ObjectPool.exe!0x00007FF78D07561A()
+    ObjectPool.exe!0x00007FF78D07DF3A()
+    ObjectPool.exe!0x00007FF78D07568A()
+    ObjectPool.exe!0x00007FF78D090699()
+    ObjectPool.exe!0x00007FF78D089CAC()
+    ObjectPool.exe!0x00007FF78D08CBA7()
+    ObjectPool.exe!0x00007FF78D0892F5()
+    ObjectPool.exe!0x00007FF78D07529A()
+    ObjectPool.exe!0x00007FF78D07DD7A()
+    ObjectPool.exe!0x00007FF78D07530A()
+    ObjectPool.exe!0x00007FF78D0904D9()
+    ObjectPool.exe!0x00007FF78D089D4C()
+    ObjectPool.exe!0x00007FF78D089225()
+    ObjectPool.exe!0x00007FF78D0751BA()
+    ObjectPool.exe!0x00007FF78D07DD0A()
+    ObjectPool.exe!0x00007FF78D07522A()
+    ObjectPool.exe!0x00007FF78D090469()
+    ObjectPool.exe!0x00007FF78D089C0C()
+    ObjectPool.exe!0x00007FF78D077F38()
+    ObjectPool.exe!0x00007FF78D093D79()
+    ObjectPool.exe!0x00007FF78D096759()
+    ObjectPool.exe!0x00007FF78D09D874()
+    ObjectPool.exe!0x00007FF78D0974D0()
+    ObjectPool.exe!0x00007FF78D08CC87()
+    MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
+    ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
+    ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
+    KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
+    ntdll.dll!RtlUserThreadStart() + 0x34 bytes
+  Data:
+    48 96 C1 F1    05 00 00 00    FC 00 00 00    64 00 00 00     H....... ....d...
+    00 00 00 00    00 00 00 00    00 0B BF F1    05 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 77 68 61    74 65 76 65    72 0A 00 00    00 00 00 00     .whateve r.......
+    00 00 00 00    00 00 00 00    0F 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    B0 96 C1 F1    05 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    18 97 C1 F1    05 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
 
 
 Visual Leak Detector detected 4 memory leaks (82768 bytes).
-Largest number used: 122896 bytes.
-Total allocations: 346231 bytes.
+Largest number used: 89152 bytes.
+Total allocations: 281496 bytes.
 Visual Leak Detector is now exiting.
