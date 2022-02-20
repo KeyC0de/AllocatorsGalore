@@ -12,7 +12,6 @@
 
 int main()
 {
-	std::ios_base::sync_with_stdio( false );
 	int* Ai = new int[100];
 #pragma warning( suppress: 6001 )
 	std::cout << Ai[0] << '\n';

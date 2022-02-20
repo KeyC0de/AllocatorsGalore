@@ -1,8 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <new>
-#include <type_traits>
 
 
 //=============================================================
@@ -10,7 +8,6 @@
 //
 // \author	Nikos Lazaridis (KeyC0de)
 // \date	3-Oct-19
-//
 //
 // \brief	Pool Allocator
 //=============================================================
@@ -86,7 +83,7 @@ public:
 		return &r;
 	}
 
-	// add object to the list
+	// add object to the list - don't use directly
 	[[nodiscard]]
 	T* allocate()
 	{
@@ -101,7 +98,7 @@ public:
 		return reinterpret_cast<T*>( &currentObj->m_storage );
 	}
 
-	// remove object from the list
+	// remove object from the list - don't use directly
 	void deallocate( T* p,
 		[[maybe_unused]] std::size_t count = 0 ) noexcept
 	{
@@ -110,6 +107,7 @@ public:
 		m_pNextFree = o;
 	}
 
+	// pass ctor args
 	template<typename... TArgs>
 	[[nodiscard]]
 	T* construct( TArgs... args )

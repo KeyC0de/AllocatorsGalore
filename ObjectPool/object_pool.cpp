@@ -1,3 +1,4 @@
+#include "object_pool.h"
 #include <algorithm>
 #include <ctime>
 #include <exception>
@@ -10,12 +11,12 @@
 #include <string>
 #include <thread>
 #include <vector>
-#include "object_pool.h"
 #include "..\..\KeyTimer\KeyTimer\key_timer.h"
 //#include "..\..\Leak_Checker\assertions.cpp"
 //#include "..\..\Leak_Checker\leak_checker.cpp"
 #if defined _DEBUG && !defined NDEBUG
-#	include <vld.h>
+#	pragma comment( lib, "C:/Program Files (x86)/Visual Leak Detector/lib/Win64/vld.lib" )
+#	include <C:/Program Files (x86)/Visual Leak Detector/include/vld.h>
 #endif
 
 //	template<typename T>
@@ -52,12 +53,12 @@ struct Elf
 		:
 		GameObject(x, y, z, cost)
 	{
-		std::cout << "Elf created" << '\n';
+		std::cout << "Elf created\n";
 	}
 
 	~Elf() noexcept
 	{
-		std::cout << "Elf destroyed" << '\n';
+		std::cout << "Elf destroyed\n";
 	}
 };
 
@@ -70,15 +71,16 @@ struct Dwarf
 
 	Dwarf() = default;
 	
-	Dwarf(int x, int y, int z, int cost)
-		: GameObject(x, y, z, cost)
+	Dwarf( int x, int y, int z, int cost )
+		:
+		GameObject(x, y, z, cost)
 	{
-		std::cout << "dwarf created" << '\n';
+		std::cout << "dwarf created\n";
 	}
 
 	~Dwarf() noexcept
 	{
-		std::cout << "dwarf destroyed" << '\n';
+		std::cout << "dwarf destroyed\n";
 	}
 };
 
@@ -88,7 +90,7 @@ int elvenFunc()
 	thread_local ObjectPool<Elf> elvenPool{229};
 	for ( int i = 0; i < elvenPool.getSize(); ++i )
 	{
-		Elf* elf = elvenPool.construct(i, i + 1, i + 2, 100);
+		Elf* elf = elvenPool.construct( i, i + 1, i + 2, 100 );
 		std::cout << elf->m_cry << '\n';
 		elvenPool.destroy( elf );
 	}
@@ -112,7 +114,6 @@ int dwarvenFunc()
 
 int main()
 {
-	std::ios_base::sync_with_stdio( false );
 	srand( time( nullptr ) );
 
 	/// testing the Pool's functionality
@@ -132,21 +133,26 @@ int main()
 			[&term]( std::future<int>& t )
 			{
 				int ret = t.get();
-				std::cout << "thread brought me " << ret << '\n';
+				std::cout << "thread brought me "
+					<< ret
+					<< '\n';
 				term += ret;
 			}
 		);
 	}
 	catch ( const std::exception& ex )
 	{
-		std::cout << ex.what() << '\n';
+		std::cout << ex.what()
+			<< '\n';
 	}
 	catch (...)
 	{
 		//const auto& ex = std::current_exception();
-		std::cout << "unknown exception" << '\n';
+		std::cout << "unknown exception\n";
 	}
-	std::cout << "Final word = " << term << '\n';
+	std::cout << "Final word = "
+		<< term
+		<< '\n';
 
 	/// testing the Pool's performance
 	//ObjectPool<GameObject> gopool{ 1024 };
@@ -180,6 +186,8 @@ int main()
 	// ~40ms - Debug
 	// ~1ms - Release
 
-	std::system( "pause" );
-	return 0;
+#if defined _DEBUG && !defined NDEBUG
+	while ( !getchar() );
+#endif
+	return EXIT_SUCCESS;
 }

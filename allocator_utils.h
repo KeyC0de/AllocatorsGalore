@@ -22,7 +22,10 @@ bool isAligned( std::uintptr_t pi,
 	return ( pi % alignment ) == 0;
 }
 
-/// align pointer forward with given alignment
+//===================================================
+//	\function	alignForward
+//	\brief  align pointer forward with given alignment
+//	\date	2022/02/20 20:34
 template<typename T>
 T* alignForward( T* p,
 	std::size_t alignment ) noexcept

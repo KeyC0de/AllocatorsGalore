@@ -1,250 +1,250 @@
 Visual Leak Detector Version 2.5.1 installed.
     Outputting the report to the debugger and to C:\Users\Nikos\Documents\visual_studio_projects\Allocators\ObjectPool\memory_leak_report.txt
 WARNING: Visual Leak Detector detected memory leaks!
----------- Block 30 at 0x00000000F1C01E70: 14656 bytes ----------
-  Leak Hash: 0x8E101424, Count: 1, Total 14656 bytes
-  Call Stack (TID 10236):
+---------- Block 30 at 0x00000000C9234E80: 14656 bytes ----------
+  Leak Hash: 0x0170B641, Count: 1, Total 14656 bytes
+  Call Stack (TID 1620):
     ucrtbased.dll!malloc()
-    ObjectPool.exe!0x00007FF78D09FE53()
-    ObjectPool.exe!0x00007FF78D09FEF3()
-    ObjectPool.exe!0x00007FF78D07E52F()
-    ObjectPool.exe!0x00007FF78D07FCEC()
-    ObjectPool.exe!0x00007FF78D09C7A8()
-    ObjectPool.exe!0x00007FF78D0756F4()
-    ObjectPool.exe!0x00007FF78D07DFAA()
-    ObjectPool.exe!0x00007FF78D077E96()
-    ObjectPool.exe!0x00007FF78D077D99()
-    ObjectPool.exe!0x00007FF78D089B7D()
-    ObjectPool.exe!0x00007FF78D07561A()
-    ObjectPool.exe!0x00007FF78D07DF3A()
-    ObjectPool.exe!0x00007FF78D07568A()
-    ObjectPool.exe!0x00007FF78D090699()
-    ObjectPool.exe!0x00007FF78D089CAC()
-    ObjectPool.exe!0x00007FF78D08CBA7()
-    ObjectPool.exe!0x00007FF78D0892F5()
-    ObjectPool.exe!0x00007FF78D07529A()
-    ObjectPool.exe!0x00007FF78D07DD7A()
-    ObjectPool.exe!0x00007FF78D07530A()
-    ObjectPool.exe!0x00007FF78D0904D9()
-    ObjectPool.exe!0x00007FF78D089D4C()
-    ObjectPool.exe!0x00007FF78D089225()
-    ObjectPool.exe!0x00007FF78D0751BA()
-    ObjectPool.exe!0x00007FF78D07DD0A()
-    ObjectPool.exe!0x00007FF78D07522A()
-    ObjectPool.exe!0x00007FF78D090469()
-    ObjectPool.exe!0x00007FF78D089C0C()
-    ObjectPool.exe!0x00007FF78D077F38()
-    ObjectPool.exe!0x00007FF78D093D79()
-    ObjectPool.exe!0x00007FF78D096759()
-    ObjectPool.exe!0x00007FF78D09D874()
-    ObjectPool.exe!0x00007FF78D0974D0()
-    ObjectPool.exe!0x00007FF78D08CC87()
+    ObjectPool.exe!0x00007FF7CA222743()
+    ObjectPool.exe!0x00007FF7CA2227E3()
+    ObjectPool.exe!0x00007FF7CA20031F()
+    ObjectPool.exe!0x00007FF7CA201ADC()
+    ObjectPool.exe!0x00007FF7CA21E598()
+    ObjectPool.exe!0x00007FF7CA1F74E4()
+    ObjectPool.exe!0x00007FF7CA1FFD9A()
+    ObjectPool.exe!0x00007FF7CA1F9C86()
+    ObjectPool.exe!0x00007FF7CA1F9B89()
+    ObjectPool.exe!0x00007FF7CA20B96D()
+    ObjectPool.exe!0x00007FF7CA1F740A()
+    ObjectPool.exe!0x00007FF7CA1FFD2A()
+    ObjectPool.exe!0x00007FF7CA1F747A()
+    ObjectPool.exe!0x00007FF7CA212489()
+    ObjectPool.exe!0x00007FF7CA20BA9C()
+    ObjectPool.exe!0x00007FF7CA20E997()
+    ObjectPool.exe!0x00007FF7CA20B0E5()
+    ObjectPool.exe!0x00007FF7CA1F708A()
+    ObjectPool.exe!0x00007FF7CA1FFB6A()
+    ObjectPool.exe!0x00007FF7CA1F70FA()
+    ObjectPool.exe!0x00007FF7CA2122C9()
+    ObjectPool.exe!0x00007FF7CA20BB3C()
+    ObjectPool.exe!0x00007FF7CA20B015()
+    ObjectPool.exe!0x00007FF7CA1F6FAA()
+    ObjectPool.exe!0x00007FF7CA1FFAFA()
+    ObjectPool.exe!0x00007FF7CA1F701A()
+    ObjectPool.exe!0x00007FF7CA212259()
+    ObjectPool.exe!0x00007FF7CA20B9FC()
+    ObjectPool.exe!0x00007FF7CA1F9D28()
+    ObjectPool.exe!0x00007FF7CA215B69()
+    ObjectPool.exe!0x00007FF7CA218549()
+    ObjectPool.exe!0x00007FF7CA21F664()
+    ObjectPool.exe!0x00007FF7CA2192C0()
+    ObjectPool.exe!0x00007FF7CA20EA77()
     MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
-    KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
-    ntdll.dll!RtlUserThreadStart() + 0x34 bytes
+    ntdll.dll!TpAllocPool() + 0xA60 bytes
+    ntdll.dll!TpReleaseCleanupGroupMembers() + 0xADA bytes
+    KERNEL32.DLL!BaseThreadInitThunk() + 0x14 bytes
+    ntdll.dll!RtlUserThreadStart() + 0x21 bytes
   Data:
-    B0 1E C0 F1    05 00 00 00    E6 00 00 00    64 00 00 00     ........ ....d...
-    00 00 00 00    00 00 00 00    00 9A BE F1    05 00 00 00     ........ ........
+    C0 4E 23 C9    0E 02 00 00    E6 00 00 00    64 00 00 00     .N#..... ....d...
+    00 00 00 00    00 00 00 00    00 2B 24 C9    0E 02 00 00     ........ .+$.....
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    F0 1E C0 F1    05 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 4F 23 C9    0E 02 00 00    00 00 00 00    00 00 00 00     .O#..... ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    30 1F C0 F1    05 00 00 00    00 00 00 00    00 00 00 00     0....... ........
+    40 4F 23 C9    0E 02 00 00    00 00 00 00    00 00 00 00     @O#..... ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    70 1F C0 F1    05 00 00 00    00 00 00 00    00 00 00 00     p....... ........
+    80 4F 23 C9    0E 02 00 00    00 00 00 00    00 00 00 00     .O#..... ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
 
 
----------- Block 44 at 0x00000000F1C08470: 26624 bytes ----------
-  Leak Hash: 0xB3B9D8ED, Count: 1, Total 26624 bytes
-  Call Stack (TID 3716):
+---------- Block 39 at 0x00000000C9239C70: 26624 bytes ----------
+  Leak Hash: 0x3CD97A88, Count: 1, Total 26624 bytes
+  Call Stack (TID 14016):
     ucrtbased.dll!malloc()
-    ObjectPool.exe!0x00007FF78D09FE53()
-    ObjectPool.exe!0x00007FF78D09FEF3()
-    ObjectPool.exe!0x00007FF78D07E40F()
-    ObjectPool.exe!0x00007FF78D07FB6C()
-    ObjectPool.exe!0x00007FF78D09C548()
-    ObjectPool.exe!0x00007FF78D0756F4()
-    ObjectPool.exe!0x00007FF78D07DFAA()
-    ObjectPool.exe!0x00007FF78D077E96()
-    ObjectPool.exe!0x00007FF78D077D99()
-    ObjectPool.exe!0x00007FF78D089B7D()
-    ObjectPool.exe!0x00007FF78D07561A()
-    ObjectPool.exe!0x00007FF78D07DF3A()
-    ObjectPool.exe!0x00007FF78D07568A()
-    ObjectPool.exe!0x00007FF78D090699()
-    ObjectPool.exe!0x00007FF78D089CAC()
-    ObjectPool.exe!0x00007FF78D08CBA7()
-    ObjectPool.exe!0x00007FF78D0892F5()
-    ObjectPool.exe!0x00007FF78D07529A()
-    ObjectPool.exe!0x00007FF78D07DD7A()
-    ObjectPool.exe!0x00007FF78D07530A()
-    ObjectPool.exe!0x00007FF78D0904D9()
-    ObjectPool.exe!0x00007FF78D089D4C()
-    ObjectPool.exe!0x00007FF78D089225()
-    ObjectPool.exe!0x00007FF78D0751BA()
-    ObjectPool.exe!0x00007FF78D07DD0A()
-    ObjectPool.exe!0x00007FF78D07522A()
-    ObjectPool.exe!0x00007FF78D090469()
-    ObjectPool.exe!0x00007FF78D089C0C()
-    ObjectPool.exe!0x00007FF78D077F38()
-    ObjectPool.exe!0x00007FF78D093D79()
-    ObjectPool.exe!0x00007FF78D096759()
-    ObjectPool.exe!0x00007FF78D09D874()
-    ObjectPool.exe!0x00007FF78D0974D0()
-    ObjectPool.exe!0x00007FF78D08CC87()
+    ObjectPool.exe!0x00007FF7CA222743()
+    ObjectPool.exe!0x00007FF7CA2227E3()
+    ObjectPool.exe!0x00007FF7CA2001FF()
+    ObjectPool.exe!0x00007FF7CA20195C()
+    ObjectPool.exe!0x00007FF7CA21E338()
+    ObjectPool.exe!0x00007FF7CA1F74E4()
+    ObjectPool.exe!0x00007FF7CA1FFD9A()
+    ObjectPool.exe!0x00007FF7CA1F9C86()
+    ObjectPool.exe!0x00007FF7CA1F9B89()
+    ObjectPool.exe!0x00007FF7CA20B96D()
+    ObjectPool.exe!0x00007FF7CA1F740A()
+    ObjectPool.exe!0x00007FF7CA1FFD2A()
+    ObjectPool.exe!0x00007FF7CA1F747A()
+    ObjectPool.exe!0x00007FF7CA212489()
+    ObjectPool.exe!0x00007FF7CA20BA9C()
+    ObjectPool.exe!0x00007FF7CA20E997()
+    ObjectPool.exe!0x00007FF7CA20B0E5()
+    ObjectPool.exe!0x00007FF7CA1F708A()
+    ObjectPool.exe!0x00007FF7CA1FFB6A()
+    ObjectPool.exe!0x00007FF7CA1F70FA()
+    ObjectPool.exe!0x00007FF7CA2122C9()
+    ObjectPool.exe!0x00007FF7CA20BB3C()
+    ObjectPool.exe!0x00007FF7CA20B015()
+    ObjectPool.exe!0x00007FF7CA1F6FAA()
+    ObjectPool.exe!0x00007FF7CA1FFAFA()
+    ObjectPool.exe!0x00007FF7CA1F701A()
+    ObjectPool.exe!0x00007FF7CA212259()
+    ObjectPool.exe!0x00007FF7CA20B9FC()
+    ObjectPool.exe!0x00007FF7CA1F9D28()
+    ObjectPool.exe!0x00007FF7CA215B69()
+    ObjectPool.exe!0x00007FF7CA218549()
+    ObjectPool.exe!0x00007FF7CA21F664()
+    ObjectPool.exe!0x00007FF7CA2192C0()
+    ObjectPool.exe!0x00007FF7CA20EA77()
     MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
-    KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
-    ntdll.dll!RtlUserThreadStart() + 0x34 bytes
+    ntdll.dll!TpAllocPool() + 0xA60 bytes
+    ntdll.dll!TpReleaseCleanupGroupMembers() + 0xADA bytes
+    KERNEL32.DLL!BaseThreadInitThunk() + 0x14 bytes
+    ntdll.dll!RtlUserThreadStart() + 0x21 bytes
   Data:
-    D8 84 C0 F1    05 00 00 00    FC 00 00 00    64 00 00 00     ........ ....d...
-    00 00 00 00    00 00 00 00    00 0E BF F1    05 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 77 68 61    74 65 76 65    72 0A 00 00    00 00 00 00     .whateve r.......
-    00 00 00 00    00 00 00 00    0F 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    40 85 C0 F1    05 00 00 00     ........ @.......
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    A8 85 C0 F1    05 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-
-
----------- Block 59 at 0x00000000F1C12830: 14656 bytes ----------
-  Leak Hash: 0x8E101424, Count: 1, Total 14656 bytes
-  Call Stack (TID 9140):
-    ucrtbased.dll!malloc()
-    ObjectPool.exe!0x00007FF78D09FE53()
-    ObjectPool.exe!0x00007FF78D09FEF3()
-    ObjectPool.exe!0x00007FF78D07E52F()
-    ObjectPool.exe!0x00007FF78D07FCEC()
-    ObjectPool.exe!0x00007FF78D09C7A8()
-    ObjectPool.exe!0x00007FF78D0756F4()
-    ObjectPool.exe!0x00007FF78D07DFAA()
-    ObjectPool.exe!0x00007FF78D077E96()
-    ObjectPool.exe!0x00007FF78D077D99()
-    ObjectPool.exe!0x00007FF78D089B7D()
-    ObjectPool.exe!0x00007FF78D07561A()
-    ObjectPool.exe!0x00007FF78D07DF3A()
-    ObjectPool.exe!0x00007FF78D07568A()
-    ObjectPool.exe!0x00007FF78D090699()
-    ObjectPool.exe!0x00007FF78D089CAC()
-    ObjectPool.exe!0x00007FF78D08CBA7()
-    ObjectPool.exe!0x00007FF78D0892F5()
-    ObjectPool.exe!0x00007FF78D07529A()
-    ObjectPool.exe!0x00007FF78D07DD7A()
-    ObjectPool.exe!0x00007FF78D07530A()
-    ObjectPool.exe!0x00007FF78D0904D9()
-    ObjectPool.exe!0x00007FF78D089D4C()
-    ObjectPool.exe!0x00007FF78D089225()
-    ObjectPool.exe!0x00007FF78D0751BA()
-    ObjectPool.exe!0x00007FF78D07DD0A()
-    ObjectPool.exe!0x00007FF78D07522A()
-    ObjectPool.exe!0x00007FF78D090469()
-    ObjectPool.exe!0x00007FF78D089C0C()
-    ObjectPool.exe!0x00007FF78D077F38()
-    ObjectPool.exe!0x00007FF78D093D79()
-    ObjectPool.exe!0x00007FF78D096759()
-    ObjectPool.exe!0x00007FF78D09D874()
-    ObjectPool.exe!0x00007FF78D0974D0()
-    ObjectPool.exe!0x00007FF78D08CC87()
-    MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
-    KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
-    ntdll.dll!RtlUserThreadStart() + 0x34 bytes
-  Data:
-    70 28 C1 F1    05 00 00 00    E6 00 00 00    64 00 00 00     p(...... ....d...
-    00 00 00 00    00 00 00 00    00 9D BE F1    05 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    B0 28 C1 F1    05 00 00 00    00 00 00 00    00 00 00 00     .(...... ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    F0 28 C1 F1    05 00 00 00    00 00 00 00    00 00 00 00     .(...... ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    30 29 C1 F1    05 00 00 00    00 00 00 00    00 00 00 00     0)...... ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-
-
----------- Block 71 at 0x00000000F1C195E0: 26624 bytes ----------
-  Leak Hash: 0xB3B9D8ED, Count: 1, Total 26624 bytes
-  Call Stack (TID 5824):
-    ucrtbased.dll!malloc()
-    ObjectPool.exe!0x00007FF78D09FE53()
-    ObjectPool.exe!0x00007FF78D09FEF3()
-    ObjectPool.exe!0x00007FF78D07E40F()
-    ObjectPool.exe!0x00007FF78D07FB6C()
-    ObjectPool.exe!0x00007FF78D09C548()
-    ObjectPool.exe!0x00007FF78D0756F4()
-    ObjectPool.exe!0x00007FF78D07DFAA()
-    ObjectPool.exe!0x00007FF78D077E96()
-    ObjectPool.exe!0x00007FF78D077D99()
-    ObjectPool.exe!0x00007FF78D089B7D()
-    ObjectPool.exe!0x00007FF78D07561A()
-    ObjectPool.exe!0x00007FF78D07DF3A()
-    ObjectPool.exe!0x00007FF78D07568A()
-    ObjectPool.exe!0x00007FF78D090699()
-    ObjectPool.exe!0x00007FF78D089CAC()
-    ObjectPool.exe!0x00007FF78D08CBA7()
-    ObjectPool.exe!0x00007FF78D0892F5()
-    ObjectPool.exe!0x00007FF78D07529A()
-    ObjectPool.exe!0x00007FF78D07DD7A()
-    ObjectPool.exe!0x00007FF78D07530A()
-    ObjectPool.exe!0x00007FF78D0904D9()
-    ObjectPool.exe!0x00007FF78D089D4C()
-    ObjectPool.exe!0x00007FF78D089225()
-    ObjectPool.exe!0x00007FF78D0751BA()
-    ObjectPool.exe!0x00007FF78D07DD0A()
-    ObjectPool.exe!0x00007FF78D07522A()
-    ObjectPool.exe!0x00007FF78D090469()
-    ObjectPool.exe!0x00007FF78D089C0C()
-    ObjectPool.exe!0x00007FF78D077F38()
-    ObjectPool.exe!0x00007FF78D093D79()
-    ObjectPool.exe!0x00007FF78D096759()
-    ObjectPool.exe!0x00007FF78D09D874()
-    ObjectPool.exe!0x00007FF78D0974D0()
-    ObjectPool.exe!0x00007FF78D08CC87()
-    MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x3397 bytes
-    ntdll.dll!RtlFreeUnicodeString() + 0x17B7 bytes
-    KERNEL32.DLL!BaseThreadInitThunk() + 0x22 bytes
-    ntdll.dll!RtlUserThreadStart() + 0x34 bytes
-  Data:
-    48 96 C1 F1    05 00 00 00    FC 00 00 00    64 00 00 00     H....... ....d...
-    00 00 00 00    00 00 00 00    00 0B BF F1    05 00 00 00     ........ ........
+    D8 9C 23 C9    0E 02 00 00    FC 00 00 00    64 00 00 00     ..#..... ....d...
+    00 00 00 00    00 00 00 00    00 1F 22 C9    0E 02 00 00     ........ ..".....
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 77 68 61    74 65 76 65    72 0A 00 00    00 00 00 00     .whateve r.......
     00 00 00 00    00 00 00 00    0F 00 00 00    00 00 00 00     ........ ........
-    00 00 00 00    00 00 00 00    B0 96 C1 F1    05 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    40 9D 23 C9    0E 02 00 00     ........ @.#.....
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
-    18 97 C1 F1    05 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    A8 9D 23 C9    0E 02 00 00    00 00 00 00    00 00 00 00     ..#..... ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 58 at 0x00000000C9245BA0: 14656 bytes ----------
+  Leak Hash: 0x0170B641, Count: 1, Total 14656 bytes
+  Call Stack (TID 10468):
+    ucrtbased.dll!malloc()
+    ObjectPool.exe!0x00007FF7CA222743()
+    ObjectPool.exe!0x00007FF7CA2227E3()
+    ObjectPool.exe!0x00007FF7CA20031F()
+    ObjectPool.exe!0x00007FF7CA201ADC()
+    ObjectPool.exe!0x00007FF7CA21E598()
+    ObjectPool.exe!0x00007FF7CA1F74E4()
+    ObjectPool.exe!0x00007FF7CA1FFD9A()
+    ObjectPool.exe!0x00007FF7CA1F9C86()
+    ObjectPool.exe!0x00007FF7CA1F9B89()
+    ObjectPool.exe!0x00007FF7CA20B96D()
+    ObjectPool.exe!0x00007FF7CA1F740A()
+    ObjectPool.exe!0x00007FF7CA1FFD2A()
+    ObjectPool.exe!0x00007FF7CA1F747A()
+    ObjectPool.exe!0x00007FF7CA212489()
+    ObjectPool.exe!0x00007FF7CA20BA9C()
+    ObjectPool.exe!0x00007FF7CA20E997()
+    ObjectPool.exe!0x00007FF7CA20B0E5()
+    ObjectPool.exe!0x00007FF7CA1F708A()
+    ObjectPool.exe!0x00007FF7CA1FFB6A()
+    ObjectPool.exe!0x00007FF7CA1F70FA()
+    ObjectPool.exe!0x00007FF7CA2122C9()
+    ObjectPool.exe!0x00007FF7CA20BB3C()
+    ObjectPool.exe!0x00007FF7CA20B015()
+    ObjectPool.exe!0x00007FF7CA1F6FAA()
+    ObjectPool.exe!0x00007FF7CA1FFAFA()
+    ObjectPool.exe!0x00007FF7CA1F701A()
+    ObjectPool.exe!0x00007FF7CA212259()
+    ObjectPool.exe!0x00007FF7CA20B9FC()
+    ObjectPool.exe!0x00007FF7CA1F9D28()
+    ObjectPool.exe!0x00007FF7CA215B69()
+    ObjectPool.exe!0x00007FF7CA218549()
+    ObjectPool.exe!0x00007FF7CA21F664()
+    ObjectPool.exe!0x00007FF7CA2192C0()
+    ObjectPool.exe!0x00007FF7CA20EA77()
+    MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
+    ntdll.dll!TpAllocPool() + 0xA60 bytes
+    ntdll.dll!TpReleaseCleanupGroupMembers() + 0xADA bytes
+    KERNEL32.DLL!BaseThreadInitThunk() + 0x14 bytes
+    ntdll.dll!RtlUserThreadStart() + 0x21 bytes
+  Data:
+    E0 5B 24 C9    0E 02 00 00    E6 00 00 00    64 00 00 00     .[$..... ....d...
+    00 00 00 00    00 00 00 00    00 27 24 C9    0E 02 00 00     ........ .'$.....
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    20 5C 24 C9    0E 02 00 00    00 00 00 00    00 00 00 00     .\$..... ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    60 5C 24 C9    0E 02 00 00    00 00 00 00    00 00 00 00     `\$..... ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    A0 5C 24 C9    0E 02 00 00    00 00 00 00    00 00 00 00     .\$..... ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 74 at 0x00000000C924AB40: 26624 bytes ----------
+  Leak Hash: 0x3CD97A88, Count: 1, Total 26624 bytes
+  Call Stack (TID 12116):
+    ucrtbased.dll!malloc()
+    ObjectPool.exe!0x00007FF7CA222743()
+    ObjectPool.exe!0x00007FF7CA2227E3()
+    ObjectPool.exe!0x00007FF7CA2001FF()
+    ObjectPool.exe!0x00007FF7CA20195C()
+    ObjectPool.exe!0x00007FF7CA21E338()
+    ObjectPool.exe!0x00007FF7CA1F74E4()
+    ObjectPool.exe!0x00007FF7CA1FFD9A()
+    ObjectPool.exe!0x00007FF7CA1F9C86()
+    ObjectPool.exe!0x00007FF7CA1F9B89()
+    ObjectPool.exe!0x00007FF7CA20B96D()
+    ObjectPool.exe!0x00007FF7CA1F740A()
+    ObjectPool.exe!0x00007FF7CA1FFD2A()
+    ObjectPool.exe!0x00007FF7CA1F747A()
+    ObjectPool.exe!0x00007FF7CA212489()
+    ObjectPool.exe!0x00007FF7CA20BA9C()
+    ObjectPool.exe!0x00007FF7CA20E997()
+    ObjectPool.exe!0x00007FF7CA20B0E5()
+    ObjectPool.exe!0x00007FF7CA1F708A()
+    ObjectPool.exe!0x00007FF7CA1FFB6A()
+    ObjectPool.exe!0x00007FF7CA1F70FA()
+    ObjectPool.exe!0x00007FF7CA2122C9()
+    ObjectPool.exe!0x00007FF7CA20BB3C()
+    ObjectPool.exe!0x00007FF7CA20B015()
+    ObjectPool.exe!0x00007FF7CA1F6FAA()
+    ObjectPool.exe!0x00007FF7CA1FFAFA()
+    ObjectPool.exe!0x00007FF7CA1F701A()
+    ObjectPool.exe!0x00007FF7CA212259()
+    ObjectPool.exe!0x00007FF7CA20B9FC()
+    ObjectPool.exe!0x00007FF7CA1F9D28()
+    ObjectPool.exe!0x00007FF7CA215B69()
+    ObjectPool.exe!0x00007FF7CA218549()
+    ObjectPool.exe!0x00007FF7CA21F664()
+    ObjectPool.exe!0x00007FF7CA2192C0()
+    ObjectPool.exe!0x00007FF7CA20EA77()
+    MSVCP140D.dll!Concurrency::details::_Schedule_chore() + 0x167 bytes
+    ntdll.dll!TpAllocPool() + 0xA60 bytes
+    ntdll.dll!TpReleaseCleanupGroupMembers() + 0xADA bytes
+    KERNEL32.DLL!BaseThreadInitThunk() + 0x14 bytes
+    ntdll.dll!RtlUserThreadStart() + 0x21 bytes
+  Data:
+    A8 AB 24 C9    0E 02 00 00    FC 00 00 00    64 00 00 00     ..$..... ....d...
+    00 00 00 00    00 00 00 00    00 1B 22 C9    0E 02 00 00     ........ ..".....
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    0F 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 77 68 61    74 65 76 65    72 0A 00 00    00 00 00 00     .whateve r.......
+    00 00 00 00    00 00 00 00    0F 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    10 AC 24 C9    0E 02 00 00     ........ ..$.....
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    78 AC 24 C9    0E 02 00 00    00 00 00 00    00 00 00 00     x.$..... ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
     00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
 

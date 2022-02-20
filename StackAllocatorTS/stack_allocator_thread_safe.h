@@ -94,8 +94,7 @@ public:
 			"m_pData is null!" );
 
 		std::size_t currentAllocationStartAddress = alignForward(
-			(std::size_t) m_pOffset.load( std::memory_order_relaxed )
-			+ sizeof( Header ),
+			(std::size_t) m_pOffset.load( std::memory_order_relaxed ) + sizeof( Header ),
 			m_alignment );
 
 #ifdef _DEBUG
